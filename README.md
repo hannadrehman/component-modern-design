@@ -122,15 +122,43 @@ Hangular-moderndesign
 |----packages.json // all dependencies for project are here.
 ``` 
 ##The Framework
-The prerequisite of this project are : AngularJs 1.5, NodeJs
+
+The prerequisite of this project are : AngularJs 1.5, NodeJs and Sass for styling.
+the sass file are compiled into css files by gulp js.
+node syntax in components is also converted into Js files by gulp browserify.
+
 Whats interesting about this project is that it is using Angular Componetns extensively. 
 so what exacly are components ?
 Components are reusable piece of codes that can be used anywhere in the application by just using the component tag ```<some-component></some-component>``` for reference of angular components here is an article https://toddmotto.com/exploring-the-angular-1-5-component-method/
-e 
+
 There are 2 types of components in this framework
-1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. they have their own Html,scss/css,definition,routing,controller and Services. with this these pages become completely independent. and if working in team different members can be working on different components. they will not interfare in other team members working.
+
+1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. they have their own Html,scss/css,definition,routing,controller and Services. with this these pages become completely independent. and if working in team different members can be working on different components. they will not interfare in other team members working. all the webservice calls will be made in the service of these components and to show the data the data will be passed into the Common component. ```<my-post post-data="$ctrl.posts"></my-posts>```
+
 2. Common : these are the components who will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers.
 
+
+#The Entry Point.
+the entry point of this application is the Application Component.this is the root of the application and is inlucded in your development/index.html . this is basically a entry point component and inside this components template we start our webapplication. all other components will inherit from this component as being parent of all.
+``` //index .html
+<html>
+<head></head>
+<body>
+<!-- this is the entry point of the application !-->
+<application></application>
+
+</body>
+</html>
+```
+Application component contains :
+1.application.js : module defintion and route is here.
+2.application.html : template for this module
+3.applicationService.js : all webservice calls are to be written in factory inside it.
+4.applicationController: the controller for this application
+5.application.scss : site scss file. which sets the layout for the app
+6._colors.scss : a seperate sass partials only for colors
+7._components.scss : sass partials for css components like buttons,table , accordion etc
+7._variable.scss : all sass varables
 
 ##Contributors
 
