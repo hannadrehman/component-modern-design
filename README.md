@@ -2,8 +2,8 @@
 
 ##Synopsis
 
-Hangular-Modern Design is component Framework for front end development based on angularjs 1.5.
-the application logic has shifted from server side to client side. so new we write all the application logic in javascript and html.it is very important to build a pattern of development that would help the developer write and develop neat and reusable code.modern web development has introduced the concept of web components , react and angular are to major javascript libraries that provide a good way of defining and writting components. the major problem with this approach is that there is alot of javascript to be included in our html pages. and to structure the project is even more difficult and problamatic. so here i have developed a Framework that takes care of all these moderen web development problems. this framework is build with Nodej,Gulpjs and angularJs. this framework bundles all the javascript,html,css and provides a neat and tidy code for production.
+Hangular-Modern Design is a web component based Framework for front end development build with node and angularjs 1.5.
+the application logic has shifted from server side to client side. we write all the application logic in javascript and html.it is very important to build a pattern of development that would help the developer write and develop neat and reusable code.modern web development has introduced the concept of web components , react and angular are to major javascript libraries that provide a good way of defining and writting components. the major problem with this approach is that there is alot of javascript to be included in our html pages. and to structure the project is even more difficult and problamatic. so here i have developed a Framework that takes care of all these moderen web development problems. this framework is build with Nodej,Gulpjs and angularJs. this framework bundles all the javascript,html,css and provides a neat and tidy code for production.
 
 ##Motivation
 
