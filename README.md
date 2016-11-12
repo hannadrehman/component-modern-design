@@ -134,8 +134,16 @@ Components are reusable piece of codes that can be used anywhere in the applicat
 There are 2 types of components in this framework
 
 1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. they have their own Html,scss/css,definition,routing,controller and Services. with this these pages become completely independent. and if working in team different members can be working on different components. they will not interfare in other team members working. all the webservice calls will be made in the service of these components and to show the data the data will be passed into the Common component. ```<my-post post-data="$ctrl.posts"></my-posts>```
+to Create a new view Component there is a simple command written. open Terminal/cmd in the root folder and type this command
+```
+gulp view-component --options ComponentName
+```
 
-2. Common : these are the components who will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers.
+2. Common : these are the components who will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers. 
+to Create a new Common Component there is a simple command written. open Terminal/cmd in the root folder and type this command
+```
+gulp common-component --options ComponentName
+```
 
 
 #The Entry Point.
