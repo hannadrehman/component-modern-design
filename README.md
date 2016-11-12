@@ -11,16 +11,29 @@ i have been a strugling Ux/UI engineer for a while now. and to create a folder s
 
 ##Features
 1.Component Design Archeticture.
+
 2.Automatic Build on save.
+
 3.Browser auto refresh on save.
+
 4.automatic Sass Compilation and css minification.
+
 5.Automatic Js Build and Uglify.
+
 6.html templates compressed in angular $templateCache service.
+
 7.image optimization.
+
 8.all dependencies downloaded from npm.
+
 9.automatic file transfer to production Folder.
+
 10.Seperation of concern.
-11.Easy Commands to add new components
+
+11.Easy Commands to add new components.
+
+12.Easy installation.
+
 ##Installation
 
 You need to install NodeJs for this project to run successfully. 
