@@ -173,7 +173,18 @@ to Create a new Common Component there is a simple command written. open Termina
 ```
 gulp common-component --options ComponentName
 ```
-
+ANGULAR TEMPLATE CACHE SERVICE:
+to bundle up the html partials we will be taking advantage of angular js $templateCacheService.
+so using gulp we will automaticaly transfer and convert all html partials of the components into the angular template cache.
+```
+app.component('albumPhotos',{
+	controller:['$stateParams','albumPhotosService',require('./albumPhotosController.js')],
+	template:['$templateCache',function($templateCache){
+		return $templateCache.get('Views/AlbumPhotos/albumPhotos.html');
+	}]
+});
+```
+to read about template cache here is a good reference : https://thinkster.io/templatecache-tutorial
 
 #The Entry Point.
 the entry point of this application is the Application Component.this is the root of the application and is inlucded in your development/index.html . this is basically a entry point component and inside this components template we start our webapplication. all other components will inherit from this component as being parent of all.
