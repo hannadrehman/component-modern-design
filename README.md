@@ -140,7 +140,8 @@ There are 2 types of components in this framework
 
 #The Entry Point.
 the entry point of this application is the Application Component.this is the root of the application and is inlucded in your development/index.html . this is basically a entry point component and inside this components template we start our webapplication. all other components will inherit from this component as being parent of all.
-``` //index .html
+``` 
+<!-- index.html !-->
 <html>
 <head></head>
 <body>
