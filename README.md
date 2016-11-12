@@ -65,9 +65,31 @@ Hangular-moderndesign
         |      |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
         |      |---Images
         |           |--- // all images for dev are kept here.
-        |              
-```
-
+        |
+        |----Components
+        |      |----Application // the basic component of this Framework . the entry point.
+        |      |     |----application.html.
+               |     |----application.scss.
+               |     |----applicationController.js.
+               |     |----applicationService.js.
+               |     |----_colors.scss.
+               |     |----_variables.scss.
+               |     |----_components.scss.
+               |
+               |----Common
+                     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
+                     |        |----navigation.html
+                     |        |----navigation.js
+                     |        |----navigationController.js
+                     |        |----navigation.scss
+                     |----YourModule
+                              |----yourModule.html
+                              |----yourModule.js
+                              |----yourModule.scss
+                              |----yourModuleController.js
+                
+                
+``` 
 ##Tests
 
 Describe and show how to run the tests with code examples.
