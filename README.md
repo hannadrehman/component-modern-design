@@ -9,6 +9,18 @@ the application logic has shifted from server side to client side. so new we wri
 
 i have been a strugling Ux/UI engineer for a while now. and to create a folder structure for my project is the most challanging task ever. organisation of the code is very important when working with the team. if you are the project creater it is faily easy for you to dive into the code structure but for others it is difficult. so it is important to make a structure that makes development as well as organisation of code easy. i wanted to make a project which would make organising independent modules easy. thats is why i started on this project.
 
+##Features
+1.Component Design Archeticture.
+2.Automatic Build on save.
+3.Browser auto refresh on save.
+4.automatic Sass Compilation and css minification.
+5.Automatic Js Build and Uglify.
+6.html templates compressed in angular $templateCache service.
+7.image optimization.
+8.all dependencies downloaded from npm.
+9.automatic file transfer to production Folder.
+10.Seperation of concern.
+11.Easy Commands to add new components
 ##Installation
 
 You need to install NodeJs for this project to run successfully. 
@@ -57,49 +69,49 @@ The folder structure of this project is very simple.we have 3 basic folders in o
 Hangular-moderndesign
 |----Development
 |     |----Assets
-|     |      |----Css
-|     |      |    |----bootstrap.css //all your vendor/css libraries go here.
-|     |      | 
-|     |      |----Js
-|     |      |    |----appConfig.js // angular module definition is done here.
-      |      |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
-|     |      |---Images
-|     |           |--- // all images for dev are kept here.
+|     |     |----Css
+|     |     |    |----bootstrap.css //all your vendor/css libraries go here.
+|     |     | 
+|     |     |----Js
+|     |     |    |----appConfig.js // angular module definition is done here.
+      |     |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
+|     |     |---Images
+|     |          |--- // all images for dev are kept here.
 |     |
 |     |----Components
-|     |      |----Application // the basic component of this Framework . the entry point.
-|     |      |     |----application.html.
-|     |      |     |----application.scss.
-|     |      |     |----applicationController.js.
-|     |      |     |----applicationService.js.
-|     |      |     |----_colors.scss.
-|     |      |     |----_variables.scss.
-|     |      |     |----_components.scss.
-|     |      |
-|     |      |----Common
-|     |      |     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
-|     |      |     |        |----navigation.html
-|     |      |     |        |----navigation.js
-|     |      |     |        |----navigationController.js
-|     |      |     |        |----navigation.scss
-|     |      |     |----YourModule
-|     |      |              |----yourModule.html
-|     |      |              |----yourModule.js
-|     |      |              |----yourModule.scss
-|     |      |              |----yourModuleController.js
-|     |      |-----View
-|     |      |     |----Photos //all components that are used a Views/ pages/partials.
-|     |            |        |----photos.html
-|     |            |        |----photos.js
-|     |            |        |----photosController.js
-|     |            |        |----photosService.Scss
-|     |            |        |----photos.scss
+|     |     |----Application // the basic component of this Framework . the entry point.
+|     |     |     |----application.html.
+|     |     |     |----application.scss.
+|     |     |     |----applicationController.js.
+|     |     |     |----applicationService.js.
+|     |     |     |----_colors.scss.
+|     |     |     |----_variables.scss.
+|     |     |     |----_components.scss.
+|     |     |
+|     |     |----Common
+|     |     |     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
+|     |     |     |       |----navigation.html
+|     |     |     |       |----navigation.js
+|     |     |     |       |----navigationController.js
+|     |     |     |       |----navigation.scss
+|     |     |     |----YourModule
+|     |     |             |----yourModule.html
+|     |     |             |----yourModule.js
+|     |     |             |----yourModule.scss
+|     |     |             |----yourModuleController.js
+|     |     |-----View
+|     |     |      |----Photos //all components that are used a Views/ pages/partials.
+|     |            |       |----photos.html
+|     |            |       |----photos.js
+|     |            |       |----photosController.js
+|     |            |       |----photosService.Scss
+|     |            |       |----photos.scss
 |     |            |----Posts
-|     |                     |----posts.html
-|     |                     |----post.js
-|     |                     |----postController.js
-|     |                     |----postService.js
-|     |                     |----post.scss
+|     |                    |----posts.html
+|     |                    |----post.js
+|     |                    |----postController.js
+|     |                    |----postService.js
+|     |                    |----post.scss
 |     |----index.html 
 |
 |----Production
