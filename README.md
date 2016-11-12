@@ -24,15 +24,15 @@ I have been a strugling Ux/UI engineer for a while . and to create a folder stru
 
 7.Browser auto refresh on save.
 
-8.automatic Sass Compilation and css minification.
+8.Automatic Sass Compilation and css minification.
 
 9.Automatic Js Build and Uglify.
 
 10.html templates compressed in angular $templateCache service.
 
-11.image optimization.
+11.Image optimization.
 
-12.all dependencies downloaded from npm.
+12.All dependencies downloaded from npm.
 
 13.automatic file transfer to production Folder.
 
@@ -45,7 +45,7 @@ I have been a strugling Ux/UI engineer for a while . and to create a folder stru
 ##Installation
 
 You need to install NodeJs for this project to run successfully. 
-this project uses. NODEJS,GULPJS as the build tools or task runner.if you dont have node installed please intall node first.
+this project uses NODEJS,GULPJS as  build tools or task runners.if you dont have node installed please intall node first.
 
 WINDOWS:
 https://nodejs.org/en/download/
@@ -61,7 +61,7 @@ sudo apt-get install nodejs
 once the node and npm is installed you need to install gulp globally.
 
 here is how you can download and install gulp : 
-open cmd/terimnal and type in following commands.
+open cmd/terimnal and type the following commands.
 ```
 npm install gulp
 npm install gulp -g
@@ -69,23 +69,23 @@ npm install --global gulp-cli
 
 ```  
 for WINDOWS:
-You need to make sure that node,gulp path environment variable is set to call them from any directory.to test it type node or gulp in command line and hit enter. if there is no error then path is set. if not. then you need to explicitly set the path variables.
+You need to make sure that node,gulp path environment variable are set.to test type node or gulp in the command line and hit enter. if you do not see any error then your path is set. otherwise you need to explicitly set the path variables.
 
-if you are getting error like gulp is not recognized then follow this link for the sollution http://stackoverflow.com/questions/24027551/gulp-command-not-found-error-after-installing-gulp
+if you are getting an error like "gulp is not recognized" then follow the below link for solution http://stackoverflow.com/questions/24027551/gulp-command-not-found-error-after-installing-gulp
 
 
-I have included all the node packages used in this project even then if you want to download them manually please install node npm on your system and open package.json file to look for all the project dependencies required. you can use npm to download them for your system.
+I have included all the node packages used in this project and still if you want to download them manually please install node npm on your system and open package.json file to look for all the project dependencies required. you can use npm to download them for your system.
 
 ##UNDERSTANDING THE PROJECT STRUCTURE
-Before starting this project. it is important to know that this project is using gulpjs as a build tool.and a task runnner. to know more about gulpjs here is a reference  https://scotch.io/tutorials/automate-your-tasks-easily-with-gulp-js. here we are following a definite folder structure and its advised to follow it otherwise the build tool might fail.
+Before starting this project. it is important to know that this project is using gulpjs as a build tool and a task runnner. to know more about gulpjs here is a reference given  https://scotch.io/tutorials/automate-your-tasks-easily-with-gulp-js. Here we are following a definite folder structure and it is advised to follow the same otherwise the build tool might fail.
 
-The folder structure of this project is very simple.we have 3 basic folders in our root directory with a gulpfile.js, package.json and readme.md
+The folder structure of this project is very simple. We have 3 basic folders in our root directory with a gulpfile.js, package.json and readme.md
 
-1.Development Folder : this folder contains all the files and and sub folders where you will actually code.(html,sass/css,js,).
+1.Development Folder : This folder contains all the files and sub folders where you will actually code.(html,sass/css,js,).
 
-2.Production Folder : this folder will be automatically populated with the files from the dev folder. Gulp does that task and all code for that is written in gulpfile.js. so you dont have to write or edit any file in this folder.
+2.Production Folder : This folder will be automatically populated with the files from the dev folder. Gulp does that task and all code for that is written in gulpfile.js. so you dont have to write or edit any file in this folder.
 
-3.node modules Folder : this contains all the node modules required for the project. refer to packages.json to check all the dependencies required.
+3.node modules Folder : This contains all the node modules required for the project. refer to packages.json to check all the dependencies required.
 ```
 Hangular-moderndesign
 |----Development
@@ -156,23 +156,23 @@ Hangular-moderndesign
 ``` 
 ##The Framework
 
-The prerequisite of this project are : AngularJs 1.5, NodeJs and Sass for styling.
-the sass file are compiled into css files by gulp js.
-node syntax in components is also converted into Js files by gulp browserify.
+The pre-requisites for this project are : AngularJs 1.5, NodeJs and Sass for styling.
+the sass files are compiled into css files by gulp js.
+Node syntax in components is also converted into Js  by gulp js.
 
-Whats interesting about this project is that it is using Angular Componetns extensively. 
-so what exacly are components ?
-Components are reusable piece of codes that can be used anywhere in the application by just using the component tag ```<some-component></some-component>``` for reference of angular components here is an article https://toddmotto.com/exploring-the-angular-1-5-component-method/
+What's interesting about this project is that it is using Angular Components extensively. 
+so what exactly are components ?
+Components are reusable piece of codes that can be used anywhere in the application by just using the component tag ```<some-component></some-component>``` here is an article given for reference of angular components by todd motto https://toddmotto.com/exploring-the-angular-1-5-component-method/
 
-There are 2 types of components in this framework
+There are 2 types of components in this framework:
 
-1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. they have their own Html,scss/css,definition,routing,controller and Services. with this these pages become completely independent. and if working in team different members can be working on different components. they will not interfare in other team members working. all the webservice calls will be made in the service of these components and to show the data the data will be passed into the Common component. ```<my-post post-data="$ctrl.posts"></my-posts>```
+1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. they have their own Html,scss/css,definition,routing,controller and Services. with this, these pages/components becomes completely independent. and if working in a team,  different members can be working on different components. they will not interfere in other team members work. all the webservice calls for the component will be made in the component service.js file and to display the data it will be passed into the "Common component". ```<my-post post-data="$ctrl.posts"></my-posts>```
 to Create a new view Component there is a simple command written. open Terminal/cmd in the root folder and type this command
 ```
 gulp view-component --options ComponentName
 ```
 
-2. Common : these are the components who will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers. 
+2. Common : these are the components which will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers. 
 to Create a new Common Component there is a simple command written. open Terminal/cmd in the root folder and type this command
 ```
 gulp common-component --options ComponentName
