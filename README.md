@@ -10,29 +10,33 @@ the application logic has shifted from server side to client side. so new we wri
 i have been a strugling Ux/UI engineer for a while now. and to create a folder structure for my project is the most challanging task ever. organisation of the code is very important when working with the team. if you are the project creater it is faily easy for you to dive into the code structure but for others it is difficult. so it is important to make a structure that makes development as well as organisation of code easy. i wanted to make a project which would make organising independent modules easy. thats is why i started on this project.
 
 ##Features
-1.Component Design Archeticture.
+1.javascript code hint and beep sound on error.
 
-2.Automatic Build on save.
+2.Error notifications in Cmd/terminal
 
-3.Browser auto refresh on save.
+3.Component Design Archeticture.
 
-4.automatic Sass Compilation and css minification.
+4.Automatic Build on save.
 
-5.Automatic Js Build and Uglify.
+5.Browser auto refresh on save.
 
-6.html templates compressed in angular $templateCache service.
+6.automatic Sass Compilation and css minification.
 
-7.image optimization.
+7.Automatic Js Build and Uglify.
 
-8.all dependencies downloaded from npm.
+8.html templates compressed in angular $templateCache service.
 
-9.automatic file transfer to production Folder.
+9.image optimization.
 
-10.Seperation of concern.
+10.all dependencies downloaded from npm.
 
-11.Easy Commands to add new components.
+11.automatic file transfer to production Folder.
 
-12.Easy installation.
+12.Seperation of concern.
+
+13.Easy Commands to add new components.
+
+14.Easy installation.
 
 ##Installation
 
@@ -203,10 +207,21 @@ Application component contains :
 8._variable.scss : all sass varables should be written here.
 
 
-##How to Start and Feature.
-once all the dependencies have been installed you can start the project by simply typing this command in CMD/terminal
+##How to Start.
+once all the dependencies have been installed you can start the project by simply typing this command in CMD/terminal in the root folder.
 ```
 gulp
 ```
+when adding new images to asset folder in development run this command in the root directory to transfer files to the production folder.
+```
+gulp image
+```
 this will automatically start a node server and will serve files from the production folder.
+
+##Gulpfile.js
+all the automation and task building is done in gulpfile.js
+there are specific gulp taks defined in this file that take care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production. 
+these are :
+1.the task build-component-js has uglify feature commented.uncommebt it when finally taking code to production and build it.
+2.the taks build-component-js has sourcemaps.write is uncommented. comment it and build the code before taking to production because the size of the file is increased due to source maps.
 
