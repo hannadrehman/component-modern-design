@@ -101,8 +101,25 @@ Hangular-moderndesign
 |       |                     |----postService.js
 |       |                     |----post.scss
 |       |----index.html 
+|
 |----Production
+|       |----Css
+|       |     |----bundle.css //all our custom css
+|       |     |----vendor.css // all css libraries are bundled and minified here.
+|       |----Js
+|       |     |----bundle.js // all our custom js (anglar modules and components).
+|       |     |----vendor.js // all js libraries and dependencies for angularjs
+|       |     |----templateCache.js // angularApp that has templatecache service with all html files in it,
+|       |----Images
+|       |     |--- logi.png // all images are transfered here,
 |       |
+|       |----index.html
+|       |
+|----Node Modules
+|       |---- // all required modules.
+|        
+|----gulpfile.js // build tasks are written here.
+|----packages.json // all dependencies for project are here.
 ``` 
 ##Tests
 
