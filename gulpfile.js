@@ -403,12 +403,16 @@ app.component('`+componentName+`',{
 		return $templateCache.get('Common/`+cName+'/'+componentName+`.html');
 	}]
 });`
+
+
+					//uncomment the below lines if you want to inject module details into common component service.
+					
 					//injects  service with app module created into new component service created.
-					var componentService=commentsForFiles.appModule+`app.factory('`+componentName+`Service',['$http',function($http){
-	return{
-		functionName:'functionD definition'
-	};
-}]);`;			
+// 					var componentService=commentsForFiles.appModule+`app.factory('`+componentName+`Service',['$http',function($http){
+// 	return{
+// 		functionName:'functionD definition'
+// 	};
+// }]);`;			
 				//controller file for the componenet
 					var componentController=`
 //inject the dependencies here. make sure you have injected them in the componentdefinition js files in 
@@ -424,7 +428,10 @@ function `+componentName+`Ctr(){
 					var componentSass='@import "../../Application/colors.scss"; \n @import "../../Application/variables.scss";'
 
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + appModule +'\n' +componentDef);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
+					
+					//uncomment this line if you want service in common components.
+					//file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
+					
 					file.writeFileSync(directoryToComponent+'/'+componentName+'Controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass);
