@@ -53,7 +53,20 @@ The folder structure of this project is very simple.we have 3 basic folders in o
 2.Production Folder : this folder will be automatically populated with the files from the dev folder. Gulp does that task and all code for that is written in gulpfile.js. so you dont have to write or edit any file in this folder.
 
 3.node modules Folder : this contains all the node modules required for the project. refer to packages.json to check all the dependencies required.
-
+```
+Hangular-moderndesign
+|----Development
+        |----Assets
+        |      |----Css
+        |      |    |----bootstrap.css //all your vendor/css libraries go here.
+        |      | 
+        |      |----Js
+        |      |    |----appConfig.js // angular module definition is done here.
+        |      |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
+        |      |---Images
+        |           |--- // all images for dev are kept here.
+        |              
+```
 
 ##Tests
 
