@@ -7,18 +7,18 @@ The application logic has shifted from server side to client side. We write all 
 
 ##Motivation
 
-I have been a strugling Ux/UI engineer for a while . and to create a folder structure for my project was the most challanging task ever. organisation of the code is very important when working with the team. if you are the project creator it is fairly easy for you to dive into the code structure but for others it is difficult. so it is important to make a structure that makes development as well as organisation of code easy. i wanted to make a project which would make organising independent modules easy. thats is why i started on this project.
+I have been a strugling Ux/UI engineer for a while . and to create a folder structure for my project was the most challanging task ever. organisation of the code is very important when working with the team. if you are the project creator, it is fairly easy for you to dive into the code structure but for others it is difficult. so it is important to make a structure that makes development as well as organisation of code easy.So i wanted to make a project that would make organizing independent modules easy, which is why i started with this this project.
 
 ##Features
-1.javascript code hint and beep sound on error.
+1.Javascript code hint and beep sound on error.
 
-2.Error notifications in Cmd/terminal
+2.Error notifications in Cmd/terminal.
 
 3.Automatic bundling and minification
 
-4.Html Bundling into angulat templateCache servce
+4.Html Bundling into angular templateCache service.
 
-5.Component Design Archeticture.
+5.Component Design Architecture.
 
 6.Automatic Build and bundling on save.
 
