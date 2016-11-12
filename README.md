@@ -220,8 +220,10 @@ this will automatically start a node server and will serve files from the produc
 
 ##Gulpfile.js
 all the automation and task building is done in gulpfile.js
-there are specific gulp taks defined in this file that take care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production. 
-these are :
+there are specific gulp taks defined in this file that take care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production.these are :
+
+
 1.the task build-component-js has uglify feature commented.uncommebt it when finally taking code to production and build it.
+
 2.the taks build-component-js has sourcemaps.write is uncommented. comment it and build the code before taking to production because the size of the file is increased due to source maps.
 
