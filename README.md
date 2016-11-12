@@ -13,6 +13,7 @@ i have been a strugling Ux/UI engineer for a while now. and to create a folder s
 
 You need to install NodeJs for this project to run successfully. 
 this project uses. NODEJS,GULPJS as the build tools or task runner.if you dont have node installed please intall node first.
+
 WINDOWS:
 https://nodejs.org/en/download/
 
