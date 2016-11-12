@@ -25,9 +25,7 @@ sudo apt-get update
 sudo apt-get install nodejs
 ```
 
-I have included all the node packages used in this project even then if you want to download them manually please install node npm on your system and open package.json file to look for all the project dependencies required. you can use npm to download them for your system.
-
-once the node and npm(if required) is installed you need to install gulp globally.
+once the node and npm is installed you need to install gulp globally.
 
 here is how you can download and install gulp : 
 open cmd/terimnal and type in following commands.
@@ -36,12 +34,15 @@ npm install gulp
 npm install gulp -g
 npm install --global gulp-cli
 
-```   
-once all dependencies are installed you need to make sure that node,gulp path environment variable is set to call them from any directory.
+```  
+for WINDOWS:
+You need to make sure that node,gulp path environment variable is set to call them from any directory.to test it type node or gulp in command line and hit enter. if there is no error then path is set. if not. then you need to explicitly set the path variables.
 
-##API Reference
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+I have included all the node packages used in this project even then if you want to download them manually please install node npm on your system and open package.json file to look for all the project dependencies required. you can use npm to download them for your system.
+
+
+##UNDERSTANDING THE PROJECT STRUCTURE
 
 ##Tests
 
