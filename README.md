@@ -121,9 +121,16 @@ Hangular-moderndesign
 |----gulpfile.js // build tasks are written here.
 |----packages.json // all dependencies for project are here.
 ``` 
-##Tests
+##The Framework
+The prerequisite of this project are : AngularJs 1.5, NodeJs
+Whats interesting about this project is that it is using Angular Componetns extensively. 
+so what exacly are components ?
+Components are reusable piece of codes that can be used anywhere in the application by just using the component tag ```<some-component></some-component>``` for reference of angular components here is an article https://toddmotto.com/exploring-the-angular-1-5-component-method/
+e 
+There are 2 types of components in this framework
+1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. they have their own Html,scss/css,definition,routing,controller and Services. with this these pages become completely independent. and if working in team different members can be working on different components. they will not interfare in other team members working.
+2. Common : these are the components who will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers.
 
-Describe and show how to run the tests with code examples.
 
 ##Contributors
 
