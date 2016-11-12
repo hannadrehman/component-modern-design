@@ -2,12 +2,12 @@
 
 ##Synopsis
 
-Hangular-Modern Design is a web component based Framework for front end development build with node and angularjs 1.5.
-the application logic has shifted from server side to client side. we write all the application logic in javascript and html.it is very important to build a pattern of development that would help the developer write and develop neat and reusable code.modern web development has introduced the concept of web components , react and angular are to major javascript libraries that provide a good way of defining and writting components. the major problem with this approach is that there is alot of javascript to be included in our html pages. and to structure the project is even more difficult and problamatic. so here i have developed a Framework that takes care of all these moderen web development problems. this framework is build with Nodej,Gulpjs and angularJs. this framework bundles all the javascript,html,css and provides a neat and tidy code for production.
+Hangular-Modern Design is a web component based Framework for front end development built with node and angularjs 1.5.
+The application logic has shifted from server side to client side. We write all the application logic in javascript and html.It is very important to build a pattern of development that would help the developer write and develop neat and reusable code.Modern web development has introduced the concept of web components , react and angular are two major javascript libraries that provide a good way of defining and writing components. Major problem with this approach is that there is alot of javascript to be included in our html pages. structuring the project is even more difficult and problamatic. so here i have developed a framework that takes care of all these modern web development problems. this framework is built with Nodejs,Gulpjs and angularJs. this framework bundles and minifies all the javascript,html,css and provides a neat and tidy code for production.
 
 ##Motivation
 
-i have been a strugling Ux/UI engineer for a while now. and to create a folder structure for my project is the most challanging task ever. organisation of the code is very important when working with the team. if you are the project creater it is faily easy for you to dive into the code structure but for others it is difficult. so it is important to make a structure that makes development as well as organisation of code easy. i wanted to make a project which would make organising independent modules easy. thats is why i started on this project.
+I have been a strugling Ux/UI engineer for a while . and to create a folder structure for my project was the most challanging task ever. organisation of the code is very important when working with the team. if you are the project creator it is fairly easy for you to dive into the code structure but for others it is difficult. so it is important to make a structure that makes development as well as organisation of code easy. i wanted to make a project which would make organising independent modules easy. thats is why i started on this project.
 
 ##Features
 1.javascript code hint and beep sound on error.
