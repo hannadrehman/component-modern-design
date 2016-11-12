@@ -153,27 +153,22 @@ the entry point of this application is the Application Component.this is the roo
 ```
 Application component contains :
 
-1.application.js : module defintion and route is here.
+1.application.js :contains module defintion and route .
 
-2.application.html : template for this module
+2.application.html : contains template for this module
 
-3.applicationService.js : all webservice calls are to be written in factory inside it.
+3.applicationService.js : all webservice calls should be written in factory inside it.
 
 4.applicationController: the controller for this application
 
-5.application.scss : site scss file. which sets the layout for the app
+5.application.scss : site scss file. which sets the layout for the app.
 
 6._colors.scss : a seperate sass partials only for colors
 
 7._components.scss : sass partials for css components like buttons,table , accordion etc
 
-8._variable.scss : all sass varables
+8._variable.scss : all sass varables should be written here.
 
-
-##Contributors
-
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
 
 ##License
-
-A short snippet describing the license (MIT, Apache, etc.)
+Free For All
