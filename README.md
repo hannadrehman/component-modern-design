@@ -43,11 +43,17 @@ if you are getting error like gulp is not recognized then follow this link for t
 
 I have included all the node packages used in this project even then if you want to download them manually please install node npm on your system and open package.json file to look for all the project dependencies required. you can use npm to download them for your system.
 
-
-
-
-
 ##UNDERSTANDING THE PROJECT STRUCTURE
+Before starting this project. it is important to know that this project is using gulpjs as a build tool.and a task runnner. to know more about gulpjs here is a reference  https://scotch.io/tutorials/automate-your-tasks-easily-with-gulp-js. here we are following a definite folder structure and its advised to follow it otherwise the build tool might fail.
+
+The folder structure of this project is very simple.we have 3 basic folders in our root directory with a gulpfile.js, package.json and readme.md
+
+1.Development Folder : this folder contains all the files and and sub folders where you will actually code.(html,sass/css,js,).
+
+2.Production Folder : this folder will be automatically populated with the files from the dev folder. Gulp does that task and all code for that is written in gulpfile.js. so you dont have to write or edit any file in this folder.
+
+3.node modules Folder : this contains all the node modules required for the project. refer to packages.json to check all the dependencies required.
+
 
 ##Tests
 
