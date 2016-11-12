@@ -1,0 +1,25 @@
+<!-- Author : Hannad Rehman Thu Nov 10 2016 10:12:03 GMT+0530 (India Standard Time)-->
+
+<div class="row">
+	<div class="col-md-offset-2 col-md-8">
+		
+		<div class="row">
+			<div class="col-md-12" >
+				<div class="post-cover" >
+					<div class="post" ng-repeat="p in $ctrl.post.allPosts">
+						<label >Title</label> : <label class="post-title">{{p.title}}</label><br>
+						<label class="post-body">{{p.body}}</label>
+						<div class="comments">
+							<post-comments ng-if="p.comment.length>0" comments="p.comment"></post-comments>
+							<div class="add-comment">
+							<input class="txt-comment" placeholder="Add Comment" type="text" name="">
+							<button class="btn-comment">Post</button>
+						</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

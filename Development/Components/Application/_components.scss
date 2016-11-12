@@ -1,0 +1,11 @@
+@import "colors.scss";
+@import "variables.scss";
+
+$blue-color:blue;
+
+.myname{
+	background-color:$blue-color;
+}
+.yourname{
+	border:1px;
+}

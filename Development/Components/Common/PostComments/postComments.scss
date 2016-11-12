@@ -1,0 +1,33 @@
+/* Author : Hannad Rehman Thu Nov 10 2016 10:47:00 GMT+0530 (India Standard Time)*/
+@import "../../Application/colors.scss"; 
+ @import "../../Application/variables.scss";
+
+ .comment{
+ 	padding:10px;
+ 	border-bottom:1px solid lightgray;
+ 	label{
+ 		font-weight:100;
+ 	}
+ 	.comment-picture{
+ 		    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #d3d3d3;
+    border: 1px solid gray;
+    vertical-align: top;
+    margin-top: 5px;
+ 	}
+ 	.comment-text{
+ 		width:90%;
+ 		display:inline-block;
+ 		margin-left:2%;
+ 	}
+ 	.comment-name{
+ 		font-weight:bold;
+ 		color:#26267b;
+
+ 	}
+ 	.comment-body{
+
+ 	}
+ }
