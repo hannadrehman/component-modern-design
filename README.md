@@ -56,68 +56,68 @@ The folder structure of this project is very simple.we have 3 basic folders in o
 ```
 Hangular-moderndesign
 |----Development
-|       |----Assets
-|       |      |----Css
-|       |      |    |----bootstrap.css //all your vendor/css libraries go here.
-|       |      | 
-|       |      |----Js
-|       |      |    |----appConfig.js // angular module definition is done here.
-|       |      |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
-|       |      |---Images
-|       |           |--- // all images for dev are kept here.
-|       |
-|       |----Components
-|       |      |----Application // the basic component of this Framework . the entry point.
-|       |      |     |----application.html.
-|       |      |     |----application.scss.
-|       |      |     |----applicationController.js.
-|       |      |     |----applicationService.js.
-|       |      |     |----_colors.scss.
-|       |      |     |----_variables.scss.
-|       |      |     |----_components.scss.
-|       |      |
-|       |      |----Common
-|       |      |     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
-|       |      |     |        |----navigation.html
-|       |      |     |        |----navigation.js
-|       |      |     |        |----navigationController.js
-|       |      |     |        |----navigation.scss
-|       |      |     |----YourModule
-|       |      |              |----yourModule.html
-|       |      |              |----yourModule.js
-|       |      |              |----yourModule.scss
-|       |      |              |----yourModuleController.js
-|       |      |-----View
-|       |      |     |----Photos //all components that are used a Views/ pages/partials.
-|       |            |        |----photos.html
-|       |            |        |----photos.js
-|       |            |        |----photosController.js
-|       |            |        |----photosService.Scss
-|       |            |        |----photos.scss
-|       |            |----Posts
-|       |                     |----posts.html
-|       |                     |----post.js
-|       |                     |----postController.js
-|       |                     |----postService.js
-|       |                     |----post.scss
-|       |----index.html 
+|      |----Assets
+|      |      |----Css
+|      |      |    |----bootstrap.css //all your vendor/css libraries go here.
+|      |      | 
+|      |      |----Js
+|      |      |    |----appConfig.js // angular module definition is done here.
+       |      |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
+|      |      |---Images
+|      |           |--- // all images for dev are kept here.
+|      |
+|      |----Components
+|      |      |----Application // the basic component of this Framework . the entry point.
+|      |      |     |----application.html.
+|      |      |     |----application.scss.
+|      |      |     |----applicationController.js.
+|      |      |     |----applicationService.js.
+|      |      |     |----_colors.scss.
+|      |      |     |----_variables.scss.
+|      |      |     |----_components.scss.
+|      |      |
+|      |      |----Common
+|      |      |     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
+|      |      |     |        |----navigation.html
+|      |      |     |        |----navigation.js
+|      |      |     |        |----navigationController.js
+|      |      |     |        |----navigation.scss
+|      |      |     |----YourModule
+|      |      |              |----yourModule.html
+|      |      |              |----yourModule.js
+|      |      |              |----yourModule.scss
+|      |      |              |----yourModuleController.js
+|      |      |-----View
+|      |      |     |----Photos //all components that are used a Views/ pages/partials.
+|      |            |        |----photos.html
+|      |            |        |----photos.js
+|      |            |        |----photosController.js
+|      |            |        |----photosService.Scss
+|      |            |        |----photos.scss
+|      |            |----Posts
+|      |                     |----posts.html
+|      |                     |----post.js
+|      |                     |----postController.js
+|      |                     |----postService.js
+|      |                     |----post.scss
+|      |----index.html 
 |
 |----Production
-|       |----Css
-|       |     |----bundle.css //all our custom css
-|       |     |----vendor.css // all css libraries are bundled and minified here.
-|       |----Js
-|       |     |----bundle.js // all our custom js (anglar modules and components).
-|       |     |----vendor.js // all js libraries and dependencies for angularjs
-|       |     |----templateCache.js // angularApp that has templatecache service with all html files in it,
-|       |----Images
-|       |     |--- logi.png // all images are transfered here,
-|       |
-|       |----index.html
-|       |
+|      |----Css
+|      |     |----bundle.css //all our custom css
+|      |     |----vendor.css // all css libraries are bundled and minified here.
+|      |----Js
+|      |     |----bundle.js // all our custom js (anglar modules and components).
+|      |     |----vendor.js // all js libraries and dependencies for angularjs
+|      |     |----templateCache.js // angularApp that has templatecache service with all html files in it,
+|      |----Images
+|      |     |--- logi.png // all images are transfered here,
+|      |
+|      |----index.html
+|      |
 |----Node Modules
-|       |---- // all required modules.
-|        
+|      |---- // all required modules.
+|       
 |----gulpfile.js // build tasks are written here.
 |----packages.json // all dependencies for project are here.
 ``` 
@@ -178,5 +178,10 @@ Application component contains :
 8._variable.scss : all sass varables should be written here.
 
 
-##License
-Free For All
+##How to Start and Feature.
+once all the dependencies have been installed you can start the project by simply typing this command in CMD/terminal
+```
+gulp
+```
+this will automatically start a node server and will serve files from the production folder.
+
