@@ -172,7 +172,7 @@ to Create a new view Component there is a simple command written. open Terminal/
 gulp view-component --options ComponentName
 ```
 
-2. Common : these are the components which will only show the data. these are reusable components that will be used to display data. they take in the data and represent that in the view.these components have their own html,css,definition,service,controllers. 
+2. Common : these components are reusable which will only display data. the data will be passed into them from the parent component.these components have their own html,css,definition,service and controllers. 
 to Create a new Common Component there is a simple command written. open Terminal/cmd in the root folder and type this command
 ```
 gulp common-component --options ComponentName
@@ -191,7 +191,7 @@ app.component('albumPhotos',{
 to read about template cache here is a good reference : https://thinkster.io/templatecache-tutorial
 
 #The Entry Point.
-the entry point of this application is the Application Component.this is the root of the application and is inlucded in your development/index.html . this is basically a entry point component and inside this components template we start our webapplication. all other components will inherit from this component as being parent of all.
+The entry point of this application is the "Application Component".this is the root of the application and is included in your development/index.html . this is basically an entry point component and inside this component template we start our web application. all other components will inherit from this component as being parent of all.
 ``` 
 <!-- index.html !-->
 <html>
@@ -223,22 +223,25 @@ Application component contains :
 
 
 ##How to Start.
-once all the dependencies have been installed you can start the project by simply typing this command in CMD/terminal in the root folder.
+Once all the dependencies have been installed you can start the project by simply typing this command in CMD/terminal in the root folder.
 ```
 gulp
 ```
-when adding new images to asset folder in development run this command in the root directory to transfer files to the production folder.
+this will automatically start a node server and will serve files from the production folder.
+
+
+
+while adding new images to asset folder in development run this command in the root directory to transfer files to the production folder.
 ```
 gulp image
 ```
-this will automatically start a node server and will serve files from the production folder.
 
 ##Gulpfile.js
-all the automation and task building is done in gulpfile.js
-there are specific gulp taks defined in this file that take care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production.these are :
+all the automation and task building work is done in gulpfile.js
+there are specific gulp taks defined in this file that takes care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production.these are :
 
 
-1.the task build-component-js has uglify feature commented.uncommebt it when finally taking code to production and build it.
+1.the task build-component-js has uglify() feature commented. uncomment it while finally taking code to production and build it.
 
-2.the taks build-component-js has sourcemaps.write is uncommented. comment it and build the code before taking to production because the size of the file is increased due to source maps.
+2.the taks build-component-js has sourcemaps.write() is uncommented. comment it and build the code before taking to production because size of the file bundle.js gets increase due to source maps.
 
