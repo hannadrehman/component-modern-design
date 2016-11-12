@@ -14,29 +14,33 @@ i have been a strugling Ux/UI engineer for a while now. and to create a folder s
 
 2.Error notifications in Cmd/terminal
 
-3.Component Design Archeticture.
+3.Automatic bundling and minification
 
-4.Automatic Build on save.
+4.Html Bundling into angulat templateCache servce
 
-5.Browser auto refresh on save.
+5.Component Design Archeticture.
 
-6.automatic Sass Compilation and css minification.
+6.Automatic Build and bundling on save.
 
-7.Automatic Js Build and Uglify.
+7.Browser auto refresh on save.
 
-8.html templates compressed in angular $templateCache service.
+8.automatic Sass Compilation and css minification.
 
-9.image optimization.
+9.Automatic Js Build and Uglify.
 
-10.all dependencies downloaded from npm.
+10.html templates compressed in angular $templateCache service.
 
-11.automatic file transfer to production Folder.
+11.image optimization.
 
-12.Seperation of concern.
+12.all dependencies downloaded from npm.
 
-13.Easy Commands to add new components.
+13.automatic file transfer to production Folder.
 
-14.Easy installation.
+14.Seperation of concern.
+
+15.Easy Commands to add new components.
+
+16.Easy installation.
 
 ##Installation
 
