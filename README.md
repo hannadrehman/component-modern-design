@@ -38,8 +38,13 @@ npm install --global gulp-cli
 for WINDOWS:
 You need to make sure that node,gulp path environment variable is set to call them from any directory.to test it type node or gulp in command line and hit enter. if there is no error then path is set. if not. then you need to explicitly set the path variables.
 
+if you are getting error like gulp is not recognized then follow this link for the sollution http://stackoverflow.com/questions/24027551/gulp-command-not-found-error-after-installing-gulp
+
 
 I have included all the node packages used in this project even then if you want to download them manually please install node npm on your system and open package.json file to look for all the project dependencies required. you can use npm to download them for your system.
+
+
+
 
 
 ##UNDERSTANDING THE PROJECT STRUCTURE
