@@ -4,7 +4,7 @@
 	<div class="col-md-offset-2 col-md-8">
 		
 		<div class="row">
-			<div class="col-md-3" ng-repeat="data in $ctrl.albums">
+			<div class=" col-xs-6 col-sm-4 col-md-3" ng-repeat="data in $ctrl.albums">
 				<div class="album-cover" style="background-image: url('{{data.url}}')" ng-click='$ctrl.openAlbum(data.id)'>
 					<div class="album-details">
 						<label>{{data.title}}</label>
