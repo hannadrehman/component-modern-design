@@ -228,6 +228,14 @@ once all the dependencies have been installed you can start the project by simpl
 gulp
 ```
 when adding new images to asset folder in development run this command in the root directory to transfer files to the production folder.
+
+For WINDOWS Uses node-sass might cause an error. if so please type in this command. 
+```
+npm rebuild node-sass
+```
+this is might happen  because node-sass package might not  be compatible with windows. so rebuild it.
+
+
 ```
 gulp image
 ```
