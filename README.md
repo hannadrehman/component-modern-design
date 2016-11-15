@@ -229,6 +229,11 @@ gulp
 ```
 This will automatically start a node server and will serve files from the production folder.
 
+For WINDOWS Uses node-sass might cause an error. if so please type in this command. 
+```
+npm rebuild node-sass
+```
+this is might happen  because node-sass package might not  be compatible with windows. so rebuild it.
 
 
 While adding new images to asset folder in development run this command in the root directory to transfer files to the production folder.
