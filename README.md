@@ -44,7 +44,7 @@ I have been a strugling Ux/UI engineer for a while . And to create a folder stru
 
 ##Installation
 
-You need to install NodeJs for this project to run successfully. 
+You need to install NodeJs for this project to run successfully.
 This project uses NODEJS,GULPJS as  build tools or task runners.If you dont have node installed please intall node first.
 
 WINDOWS:
@@ -60,7 +60,7 @@ sudo apt-get install nodejs
 
 once the node and npm is installed you need to install gulp globally.
 
-Here is how you can download and install gulp : 
+Here is how you can download and install gulp :
 Open cmd/terimnal and type the following commands.
 ```
 npm install gulp
@@ -92,10 +92,10 @@ Hangular-moderndesign
 |     |----Assets
 |     |     |----Css
 |     |     |    |----bootstrap.css //all your vendor/css libraries go here.
-|     |     | 
+|     |     |
 |     |     |----Js
 |     |     |    |----appConfig.js // angular module definition is done here.
-      |     |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here. 
+      |     |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here.
 |     |     |---Images
 |     |          |--- // all images for dev are kept here.
 |     |
@@ -115,11 +115,13 @@ Hangular-moderndesign
 |     |     |     |       |----navigation.js
 |     |     |     |       |----navigationController.js
 |     |     |     |       |----navigation.scss
+|     |     |     |       |----navigationService.js
 |     |     |     |----YourModule
 |     |     |             |----yourModule.html
 |     |     |             |----yourModule.js
 |     |     |             |----yourModule.scss
 |     |     |             |----yourModuleController.js
+|     |     |             |----yourModuleService.js
 |     |     |-----View
 |     |     |      |----Photos //all components that are used a Views/ pages/partials.
 |     |            |       |----photos.html
@@ -133,7 +135,7 @@ Hangular-moderndesign
 |     |                    |----postController.js
 |     |                    |----postService.js
 |     |                    |----post.scss
-|     |----index.html 
+|     |----index.html
 |
 |----Production
 |     |----Css
@@ -153,14 +155,14 @@ Hangular-moderndesign
 |       
 |----gulpfile.js // build tasks are written here.
 |----packages.json // all dependencies for project are here.
-``` 
+```
 ##The Framework
 
 The pre-requisites for this project are : AngularJs 1.5, NodeJs and Sass for styling.
 Sass files are compiled into css files by gulp js.
 Node syntax in components is also converted into Js  by gulp js.
 
-What's interesting about this project is that it is using Angular Components extensively. 
+What's interesting about this project is that it is using Angular Components extensively.
 So what exactly are components ?
 Components are reusable piece of codes that can be used anywhere in the application by just using the component tag ```<some-component></some-component>``` here is an article given for reference of angular components by todd motto https://toddmotto.com/exploring-the-angular-1-5-component-method/
 
@@ -172,7 +174,7 @@ to Create a new view Component there is a simple command written. open Terminal/
 gulp view-component --options ComponentName
 ```
 
-2. Common : these components are reusable which will only display data. The data will be passed into them from the parent component.these components have their own html,css,definition,service and controllers. 
+2. Common : these are the reusable components with act as seperate web parts. you can pass data objects into them and from the parent controller display. or you can call the data from the seperate webservices and represent them. you would need use angular lifecycle hooks to handle the data. like $onInit(),$onChange(),$onDestroy() etc.these components have their own html,css,definition,service and controllers.
 to Create a new Common Component there is a simple command written. Open Terminal/cmd in the root folder and type this command
 ```
 gulp common-component --options ComponentName
@@ -190,9 +192,36 @@ app.component('albumPhotos',{
 ```
 to read about template cache here is a good reference : https://thinkster.io/templatecache-tutorial
 
+##Assets Folder
+The Assets folder contain all the static files required for the project, like Css libraries,Fonts, Js libraries etc.
+we have 3 sub folder in Assets.
+1.Css : contains all css libraries.all these files will be coppied and minified vendor.css to the production folder. PLEASE MAKE SURE YOU KEEP Un MINIFIED VERSION OF CSS FILES. beacuse gulp is minifying the files for us.
+
+2.Images : this contains all Development images for the project. like logo,copyright images etc.
+
+3.Js : This is an important folder. it contains 2 main Js files.
+        1.appConfig.js : this file contains the angular module definition which is referenced in all the component files. all the depending modules are injected here in the angular app, like ui-router.
+        NOTE: here we are using templateCache module as first DI, DO NOT remove it. because we are using angular template cache to optimize the html partials and they are taken into a seperate angular app 'templateCache'. this needs to be there otherwise app will fail.
+
+        2.vendor.js: this file contains all the Js libraries required for this app. like angularjs,uirouter etc.
+        we are using node requrie syntax to get the libraries.
+        ```
+        //angularjs module starts here
+        var angular=require('angular');
+        //angular ui route module starts ere
+        var router=require('angular-ui-router');
+
+         ```
+         NOTE : here we have downloaded angular from npm and required it with node syntax. all the required files will be exported as vendor.js to production folder and will contain all the libraries minifies/uglified.
+         please make sure that all the libraries are un-minified/uglified . gulp is going to the uglification task for us.
+         ```
+         npm install --save-dev angular
+         ```
+
+
 #The Entry Point.
 The entry point of this application is the "Application Component".This is the root of the application and is included in your development/index.html . This is basically an entry point component and inside this component template we start our web application. All other components will inherit from this component as being parent of all.
-``` 
+```
 <!-- index.html !-->
 <html>
 <head></head>
@@ -229,7 +258,7 @@ gulp
 ```
 This will automatically start a node server and will serve files from the production folder.
 
-For WINDOWS Uses node-sass might cause an error. if so please type in this command. 
+For WINDOWS Uses node-sass might cause an error. if so please type in this command.
 ```
 npm rebuild node-sass
 ```
@@ -249,4 +278,3 @@ there are specific gulp taks defined in this file that takes care of the automat
 1.the task build-component-js has uglify() feature commented. uncomment it while finally taking code to production and build it.
 
 2.the taks build-component-js has sourcemaps.write() is uncommented. comment it and build the code before taking to production because size of the file bundle.js gets increase due to source maps.
-
