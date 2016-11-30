@@ -1,4 +1,4 @@
-//all dependencies go here. 
+//all dependencies go here.
 var gulp = require('gulp'),
 	jshint = require('gulp-jshint'),
 	stylishJS = require('jshint-stylish'),
@@ -55,8 +55,8 @@ gulp.task('watch',['browserSync'],function(){
 		console.log('exception found \n');
 		console.log(e);
 	}
-	
-	
+
+
 	});
 
 //all taskts go here
@@ -118,7 +118,7 @@ gulp.task('browserSync', function() {
 	});
 
 gulp.task('build-component-js',function(){
-	//build component js 
+	//build component js
 	try{
 		glob(sourcePath+'*.js',function(err,files){
 		if(err){
@@ -149,12 +149,12 @@ gulp.task('build-component-js',function(){
 		    	gutil.log('error bundle component rename  to bundle.js')
 		    	gutil.log(e)})
 	       .pipe(sourceMaps.init({ loadMaps : true }))
-	       //.pipe(uglify()) 
+	       //.pipe(uglify())
 	       .pipe(sourceMaps.write())
 	        .on('error', function(e){
 		     	gutil.beep()
 		    	gutil.log('error writing componentjs sourceMaps ')
-		    	gutil.log(e)}) 
+		    	gutil.log(e)})
 	       .pipe(gulp.dest('Production/Js'))
 	        .on('error', function(e){
 		     	gutil.beep()
@@ -172,14 +172,14 @@ gulp.task('build-component-js',function(){
 		console.log('exception found in building component \n');
 		console.log(e);
 	}
-	
+
 	});
 
 gulp.task('build-vendor-js',function(){
  	 try{
  		//gulp.src('Development/Assets/Js/vendor.js')
- 		//build vendor js. 
- 		// all js files like angular,route,sanitize must be downloaded from npm. 
+ 		//build vendor js.
+ 		// all js files like angular,route,sanitize must be downloaded from npm.
  		// if manually downloaded than edit vendorjs file in deve/assets
  	 	browserify('Development/Assets/Js/vendor.js')
        .bundle()
@@ -200,7 +200,7 @@ gulp.task('build-vendor-js',function(){
 		    	gutil.log(e)})
        //.pipe(sourceMaps.init({ loadMaps : true }))
        .pipe(uglify())  // Strip inline source maps
-       //.pipe(sourceMaps.write()) 
+       //.pipe(sourceMaps.write())
         .on('error', function(e){
 		     	gutil.beep()
 		    	gutil.log('error uglify vendorjs')
@@ -219,12 +219,12 @@ gulp.task('build-vendor-js',function(){
  	 	console.log(e);
 
  	 }
-       
+
 		});
 
 gulp.task('build-vendor-css',function(){
-	//build vendor css. 
-	// all vendor css are manually downloaded unminified. 
+	//build vendor css.
+	// all vendor css are manually downloaded unminified.
 	// css files should not be minified.
 	 return gulp.src(vendorCssPath+'*.css')
 	    .pipe(minifyCSS())
@@ -249,7 +249,7 @@ gulp.task('build-vendor-css',function(){
 
 gulp.task('view-component',function(){
 	//this task creates a new folder structure and files for the component
-	// and injects required text into the files. 
+	// and injects required text into the files.
 	//in js files the module definition will be injected,dummy html,route,import sass etc.
 
 	try{
@@ -301,8 +301,8 @@ gulp.task('view-component',function(){
  					//this is the angular app module that will be injected in the new files created
  					//later added comments also.
 					var appModule=commentsForFiles.appModule+'var app=require("../../../../Development/Assets/Js/appConfig.js");';
-					   
-					// creates component with its route and component definition aling with the controller. 
+
+					// creates component with its route and component definition aling with the controller.
 					var componentRoute=commentsForFiles.route+`app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 	$stateProvider.state('`+componentName.toLowerCase()+`',{
 			url:'/`+componentName.toLowerCase()+`',
@@ -327,7 +327,7 @@ app.component('`+componentName+`',{
 });`
 					//controller file for the componenet
 					var componentController=`
-//inject the dependencies here. make sure you have injected them in the componentdefinition js files in 
+//inject the dependencies here. make sure you have injected them in the componentdefinition js files in
 //array format. this is important
 function `+componentName+`Ctr(){
 	console.log('`+componentName+` component is up and working');
@@ -338,7 +338,7 @@ function `+componentName+`Ctr(){
 	return{
 		functionName:'functionD definition'
 	};
-}]);`;			
+}]);`;
 					//this is the basic html template for the new component
 					var  componentDummyHtml='<h1>hello you have successfully created &nbsp;'+componentName+ '&nbsp; component</h1>';
 					//this includes imports in the saas file . imports are from application component. as the root
@@ -362,13 +362,13 @@ function `+componentName+`Ctr(){
 		console.log(e);
 	}
 
-	
+
 	});
 gulp.task('common-component',function(){
 	try{
 		var args=process.argv;
 			var componentName=args[args.length-1];
-			
+
 
 			if(componentName!=undefined || componentName!=''){
 				var directoryToComponent='Development/Components/Common/'+componentName;
@@ -386,12 +386,12 @@ gulp.task('common-component',function(){
 						componentName=componentName.split('');
 						componentName[0]=componentName[0].toLowerCase();
 						componentName=componentName.join('');
-							
+
 
 					//this is the angular app module that will be injected in the new files created
 					var appModule=commentsForFiles.appModule+"var app=require('../../../../Development/Assets/Js/appConfig.js');";
-					   
-					// creates component with its route and component definition aling with the controller. 
+
+					// creates component with its route and component definition aling with the controller.
 					var componentDef=`
 app.component('`+componentName+`',{
 	//if you want to load dependencies into the controller. and also want to take care of Minification of js
@@ -406,32 +406,32 @@ app.component('`+componentName+`',{
 
 
 					//uncomment the below lines if you want to inject module details into common component service.
-					
-					//injects  service with app module created into new component service created.
-// 					var componentService=commentsForFiles.appModule+`app.factory('`+componentName+`Service',['$http',function($http){
-// 	return{
-// 		functionName:'functionD definition'
-// 	};
-// }]);`;			
+
+					injects  service with app module created into new component service created.
+					var componentService=commentsForFiles.appModule+`app.factory('`+componentName+`Service',['$http',function($http){
+	return{
+		functionName:'functionD definition'
+	};
+}]);`;
 				//controller file for the componenet
 					var componentController=`
-//inject the dependencies here. make sure you have injected them in the componentdefinition js files in 
+//inject the dependencies here. make sure you have injected them in the componentdefinition js files in
 //array format. this is important
 function `+componentName+`Ctr(){
 	console.log('`+componentName+` component is up and working');
 }
  module.exports=`+componentName+`Ctr;`;
-		
+
 		//this is the basic html template for the new component
 					var  componentDummyHtml='<h1>hello you have successfully created '+componentName+ ' component</h1>';
 					//this includes imports in the saas file . imports are from application component. as the root
 					var componentSass='@import "../../Application/colors.scss"; \n @import "../../Application/variables.scss";'
 
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + appModule +'\n' +componentDef);
-					
+
 					//uncomment this line if you want service in common components.
-					//file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
-					
+					file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
+
 					file.writeFileSync(directoryToComponent+'/'+componentName+'Controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass);
@@ -447,7 +447,7 @@ function `+componentName+`Ctr(){
 	}
 
 
-	
+
 	});
 gulp.task('build-template-cache',function(){
 
@@ -465,7 +465,7 @@ gulp.task('build-template-cache',function(){
     .pipe(browserSync.reload({
 	    		stream:true
 	    	}));
-		
+
 		});
 
 gulp.task('index-page',function(){
