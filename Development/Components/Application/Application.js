@@ -2,11 +2,7 @@
 
 var app=require('../../../Development/Assets/Js/appConfig.js');
 app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
-	$urlRouterProvider.otherwise('/photos');
-	$stateProvider.state('/',{
-			url:'/',
-		template:'<photos></photos>'
-	});
+	$urlRouterProvider.otherwise('/');
 }]);
 
 app.component('application',{
@@ -15,4 +11,3 @@ app.component('application',{
 		return $templateCache.get('Application/Application.html');
 	}]
 });
-

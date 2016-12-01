@@ -36,7 +36,7 @@ var commentsForFiles={
 
 
 //default task is run by gulp by default.
-gulp.task('default',['jshint','build-css','build-component-js','build-vendor-js','build-vendor-css','build-template-cache','index-page','watch']);
+gulp.task('default',['jshint','build-css','build-component-js','build-vendor-js','build-vendor-css','build-template-cache','index-page','image','watch']);
 gulp.task('watch',['browserSync'],function(){
 	try{
 		//all watchers go here
@@ -92,11 +92,11 @@ gulp.task('build-css', function() {
     	gutil.log('error bundle css')
     	gutil.log(e)
     })
-    .pipe(sourceMaps.write())
-    .on('error', function(e){
-     	gutil.beep()
-    	gutil.log('error write css sourceMaps')
-    	gutil.log(e)})
+    // .pipe(sourceMaps.write()) //uncomment if you want sourceMaps
+    // .on('error', function(e){
+    //  	gutil.beep()
+    // 	gutil.log('error write css sourceMaps')
+    // 	gutil.log(e)})
     .pipe(gulp.dest(destinationPath+'Css'))
     .on('error', function(e){
      	gutil.beep()
@@ -149,8 +149,12 @@ gulp.task('build-component-js',function(){
 		    	gutil.log('error bundle component rename  to bundle.js')
 		    	gutil.log(e)})
 	       .pipe(sourceMaps.init({ loadMaps : true }))
-	       //.pipe(uglify())
-	       .pipe(sourceMaps.write())
+	       //.pipe(uglify())  // uncomment when in Production
+				//  .on('error', function(e){
+				//  gutil.beep()
+				//  gutil.log('error uglifying component js ')
+				//  gutil.log(e)})
+	       .pipe(sourceMaps.write()) // comment when code is taken to production
 	        .on('error', function(e){
 		     	gutil.beep()
 		    	gutil.log('error writing componentjs sourceMaps ')
@@ -300,7 +304,7 @@ gulp.task('view-component',function(){
 
  					//this is the angular app module that will be injected in the new files created
  					//later added comments also.
-					var appModule=commentsForFiles.appModule+'var app=require("../../../../Development/Assets/Js/appConfig.js");';
+					var appModule=commentsForFiles.appModule+'var app=require("../../../../Development/Assets/Js/appConfig");';
 
 					// creates component with its route and component definition aling with the controller.
 					var componentRoute=commentsForFiles.route+`app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
@@ -312,11 +316,8 @@ gulp.task('view-component',function(){
 }]);
 
 app.component('`+componentName+`',{
-	//if you want to load dependencies into the controller. and also want to take care of Minification of js
-	//please use the array syntax, ex if you want to load $q service here use this format.
-	//controller:['$q',require('somepathetocontroller')];
-	//also you have to load  the dependencies in the controller function in the controller file.
-	controller:require('./`+componentName+`Controller.js'),
+	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+	controller:require('./`+componentName+`Controller'),
 
 	//we are using angular template cache service to cache all our templates/partials.
 	//this syntax should not be touched because gulp will covert partials in this service data.
@@ -327,8 +328,9 @@ app.component('`+componentName+`',{
 });`
 					//controller file for the componenet
 					var componentController=`
-//inject the dependencies here. make sure you have injected them in the componentdefinition js files in
-//array format. this is important
+
+//uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
+//`+componentName+`Ctr.$inject=[];
 function `+componentName+`Ctr(){
 	console.log('`+componentName+` component is up and working');
 }
@@ -350,7 +352,7 @@ function `+componentName+`Ctr(){
 					file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'Controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/ \n' + componentSass);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/ \n' +componentSass +'\n' + cssMediaQueries);
 					console.log('successfully created component ',componentName);
 
 				}
@@ -389,16 +391,13 @@ gulp.task('common-component',function(){
 
 
 					//this is the angular app module that will be injected in the new files created
-					var appModule=commentsForFiles.appModule+"var app=require('../../../../Development/Assets/Js/appConfig.js');";
+					var appModule=commentsForFiles.appModule+"var app=require('../../../../Development/Assets/Js/appConfig');";
 
 					// creates component with its route and component definition aling with the controller.
 					var componentDef=`
 app.component('`+componentName+`',{
-	//if you want to load dependencies into the controller. and also want to take care of Minification of js
-	//please use the array syntax, ex if you want to load $q service here use this format.
-	//controller:['$q',require('somepathetocontroller')];
-	//also you have to load  the dependencies in the controller function in the controller file.
-	controller:require('./`+componentName+`Controller.js'),
+	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+	controller:require('./`+componentName+`Controller'),
 	template:['$templateCache',function($templateCache){
 		return $templateCache.get('Common/`+cName+'/'+componentName+`.html');
 	}]
@@ -407,7 +406,7 @@ app.component('`+componentName+`',{
 
 					//uncomment the below lines if you want to inject module details into common component service.
 
-					injects  service with app module created into new component service created.
+					//injects  service with app module created into new component service created.
 					var componentService=commentsForFiles.appModule+`app.factory('`+componentName+`Service',['$http',function($http){
 	return{
 		functionName:'functionD definition'
@@ -415,8 +414,8 @@ app.component('`+componentName+`',{
 }]);`;
 				//controller file for the componenet
 					var componentController=`
-//inject the dependencies here. make sure you have injected them in the componentdefinition js files in
-//array format. this is important
+//uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
+//`+componentName+`Ctr.$inject=[];
 function `+componentName+`Ctr(){
 	console.log('`+componentName+` component is up and working');
 }
@@ -434,7 +433,7 @@ function `+componentName+`Ctr(){
 
 					file.writeFileSync(directoryToComponent+'/'+componentName+'Controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass +'\n'+ cssMediaQueries);
 
 					console.log('successfully created component ',componentName);
 				}
@@ -491,3 +490,127 @@ gulp.task('image',function(){
 	.pipe(imagemin({progressive:true}))
 	.pipe(gulp.dest('Production/Images'));
 	});
+	var cssMediaQueries =`
+	/* Desktops and laptops ----------- */
+	@media only screen  and (min-width : 1224px) {
+	/* Styles */
+	}
+
+	/* Large screens ----------- */
+	@media only screen  and (min-width : 1824px) {
+	/* Styles */
+	}
+
+	/* Smartphones (portrait and landscape) ----------- */
+	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	/* Styles */
+	}
+
+	/* Smartphones (landscape) ----------- */
+	@media only screen and (min-width : 321px) {
+	/* Styles */
+	}
+
+	/* Smartphones (portrait) ----------- */
+	@media only screen and (max-width : 320px) {
+	/* Styles */
+	}
+
+	/* iPads (portrait and landscape) ----------- */
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	/* Styles */
+	}
+
+	/* iPads (landscape) ----------- */
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+	and (orientation : landscape) {
+	/* Styles */
+	}
+
+	/* iPads (portrait) ----------- */
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+	and (orientation : portrait) {
+	/* Styles */
+	}
+	/**********
+	iPad 3
+	**********/
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+	and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+	and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+	/* Styles */
+	}
+
+
+	/* iPhone 4 ----------- */
+	@media only screen and (min-device-width : 320px) and (max-device-width : 480px)
+	and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width : 320px) and (max-device-width : 480px)
+	and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+	/* Styles */
+	}
+
+	/* iPhone 5 ----------- */
+	@media only screen and (min-device-width: 320px) and (max-device-height: 568px)
+	and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width: 320px) and (max-device-height: 568px)
+	and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	/* Styles */
+	}
+
+	/* iPhone 6 ----------- */
+	@media only screen and (min-device-width: 375px) and (max-device-height: 667px)
+	and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width: 375px) and (max-device-height: 667px)
+	and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	/* Styles */
+	}
+
+	/* iPhone 6+ ----------- */
+	@media only screen and (min-device-width: 414px) and (max-device-height: 736px)
+	and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width: 414px) and (max-device-height: 736px)
+	and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	/* Styles */
+	}
+
+	/* Samsung Galaxy S4 ----------- */
+	@media only screen and (min-device-width: 320px) and (max-device-height: 640px)
+	and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width: 320px) and (max-device-height: 640px)
+	and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+	/* Styles */
+	}
+
+	/* Samsung Galaxy S5 ----------- */
+	@media only screen and (min-device-width: 360px) and (max-device-height: 640px)
+	and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+	/* Styles */
+	}
+
+	@media only screen and (min-device-width: 360px) and (max-device-height: 640px)
+	and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
+	/* Styles */
+	}
+
+
+	`
