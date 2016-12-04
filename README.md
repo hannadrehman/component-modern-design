@@ -103,8 +103,8 @@ Hangular-moderndesign
 |     |     |----Application // the basic component of this Framework . the entry point.
 |     |     |     |----application.html.
 |     |     |     |----application.scss.
-|     |     |     |----applicationController.js.
-|     |     |     |----applicationService.js.
+|     |     |     |----application.controller.js.
+|     |     |     |----application.service.js.
 |     |     |     |----_colors.scss.
 |     |     |     |----_variables.scss.
 |     |     |     |----_components.scss.
@@ -113,27 +113,27 @@ Hangular-moderndesign
 |     |     |     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
 |     |     |     |       |----navigation.html
 |     |     |     |       |----navigation.js
-|     |     |     |       |----navigationController.js
+|     |     |     |       |----navigation.controller.js
 |     |     |     |       |----navigation.scss
-|     |     |     |       |----navigationService.js
+|     |     |     |       |----navigation.service.js
 |     |     |     |----YourModule
 |     |     |             |----yourModule.html
 |     |     |             |----yourModule.js
 |     |     |             |----yourModule.scss
-|     |     |             |----yourModuleController.js
-|     |     |             |----yourModuleService.js
+|     |     |             |----yourModule.controller.js
+|     |     |             |----yourModule.service.js
 |     |     |-----View
 |     |     |      |----Photos //all components that are used a Views/ pages/partials.
 |     |            |       |----photos.html
 |     |            |       |----photos.js
-|     |            |       |----photosController.js
-|     |            |       |----photosService.Scss
+|     |            |       |----photos.controller.js
+|     |            |       |----photos.service.Scss
 |     |            |       |----photos.scss
 |     |            |----Posts
 |     |                    |----posts.html
 |     |                    |----post.js
-|     |                    |----postController.js
-|     |                    |----postService.js
+|     |                    |----post.controller.js
+|     |                    |----post.service.js
 |     |                    |----post.scss
 |     |----index.html
 |
@@ -212,7 +212,7 @@ we have 3 sub folder in Assets.
         //angular ui route module starts ere
         var router=require('angular-ui-router');
          ```
-         
+
          NOTE : here we have downloaded angular from npm and required it with node syntax. all the required files will be exported as vendor.js to production folder and will contain all the libraries minifies/uglified.
          please make sure that all the libraries are un-minified/uglified . gulp is going to the uglification task for us.
          ```
