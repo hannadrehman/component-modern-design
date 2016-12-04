@@ -149,16 +149,16 @@ gulp.task('build-component-js',function(){
 		    	gutil.log('error bundle component rename  to bundle.js')
 		    	gutil.log(e)})
 	       .pipe(sourceMaps.init({ loadMaps : true }))
-	       //.pipe(uglify())  // uncomment when in Production
+	      //  .pipe(uglify())  // uncomment when in Production
 				//  .on('error', function(e){
 				//  gutil.beep()
 				//  gutil.log('error uglifying component js ')
 				//  gutil.log(e)})
-	       .pipe(sourceMaps.write()) // comment when code is taken to production
-	        .on('error', function(e){
-		     	gutil.beep()
-		    	gutil.log('error writing componentjs sourceMaps ')
-		    	gutil.log(e)})
+	      //  .pipe(sourceMaps.write()) // comment when code is taken to production
+	      //   .on('error', function(e){
+		    //  	gutil.beep()
+		    // 	gutil.log('error writing componentjs sourceMaps ')
+		    // 	gutil.log(e)})
 	       .pipe(gulp.dest('Production/Js'))
 	        .on('error', function(e){
 		     	gutil.beep()
@@ -305,6 +305,7 @@ gulp.task('view-component',function(){
  					//this is the angular app module that will be injected in the new files created
  					//later added comments also.
 					var appModule=commentsForFiles.appModule+'var app=require("../../../../Development/Assets/Js/appConfig");';
+					var controller='var componentController=require("./'+componentName+'.controller");';
 
 					// creates component with its route and component definition aling with the controller.
 					var componentRoute=commentsForFiles.route+`app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
@@ -317,7 +318,7 @@ gulp.task('view-component',function(){
 
 app.component('`+componentName+`',{
 	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:require('./`+componentName+`Controller'),
+	controller:componentController,
 
 	//we are using angular template cache service to cache all our templates/partials.
 	//this syntax should not be touched because gulp will covert partials in this service data.
@@ -328,7 +329,6 @@ app.component('`+componentName+`',{
 });`
 					//controller file for the componenet
 					var componentController=`
-
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
 //`+componentName+`Ctr.$inject=[];
 function `+componentName+`Ctr(){
@@ -336,11 +336,19 @@ function `+componentName+`Ctr(){
 }
  module.exports=`+componentName+`Ctr;`;
 					//injects  service with app module created into new component service created.
-					var componentService=`app.factory('`+componentName+`Service',['$http',function($http){
-	return{
-		functionName:'functionD definition'
-	};
-}]);`;
+					var componentService=`app.factory('`+componentName+`Service',`+componentName+`Factory);
+//dependency injection goes here. all the services that are needed by this factory
+`+componentName+`Factory.$inject=['$http'];
+function `+componentName+`Factory($http){
+	//a factory function returns a singleton object.
+	return new factoryMethods($http);
+}
+//this function contains all the factory methods,or service call methods here.
+//web service call functions should be declared here with this.functionname(){} foramt.
+function factoryMethods(http){
+	this.functionName='hello this is a factory function';
+}
+					`
 					//this is the basic html template for the new component
 					var  componentDummyHtml='<h1>hello you have successfully created &nbsp;'+componentName+ '&nbsp; component</h1>';
 					//this includes imports in the saas file . imports are from application component. as the root
@@ -348,9 +356,9 @@ function `+componentName+`Ctr(){
 
 
 					//creating new files and injecting the required data into them/
-					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' +appModule +'\n' +componentRoute);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'Controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' +appModule+'\n'+controller +'\n' +componentRoute);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/ \n' +componentSass +'\n' + cssMediaQueries);
 					console.log('successfully created component ',componentName);
@@ -392,12 +400,13 @@ gulp.task('common-component',function(){
 
 					//this is the angular app module that will be injected in the new files created
 					var appModule=commentsForFiles.appModule+"var app=require('../../../../Development/Assets/Js/appConfig');";
+					var controller='var componentController=require("./'+componentName+'.controller");'
 
 					// creates component with its route and component definition aling with the controller.
 					var componentDef=`
 app.component('`+componentName+`',{
 	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:require('./`+componentName+`Controller'),
+	controller:componentController,
 	template:['$templateCache',function($templateCache){
 		return $templateCache.get('Common/`+cName+'/'+componentName+`.html');
 	}]
@@ -407,11 +416,20 @@ app.component('`+componentName+`',{
 					//uncomment the below lines if you want to inject module details into common component service.
 
 					//injects  service with app module created into new component service created.
-					var componentService=commentsForFiles.appModule+`app.factory('`+componentName+`Service',['$http',function($http){
-	return{
-		functionName:'functionD definition'
-	};
-}]);`;
+
+var componentService=`app.factory('`+componentName+`Service',`+componentName+`Factory);
+//dependency injection goes here. all the services that are needed by this factory
+`+componentName+`Factory.$inject=['$http'];
+function `+componentName+`Factory($http){
+	//a factory function returns a singleton object.
+	return new factoryMethods($http);
+}
+//this function contains all the factory methods,or service call methods here.
+//web service call functions should be declared here with this.functionname(){} foramt.
+function factoryMethods(http){
+	this.functionName='hello this is a factory function';
+}
+`
 				//controller file for the componenet
 					var componentController=`
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -426,12 +444,12 @@ function `+componentName+`Ctr(){
 					//this includes imports in the saas file . imports are from application component. as the root
 					var componentSass='@import "../../Application/colors.scss"; \n @import "../../Application/variables.scss";'
 
-					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + appModule +'\n' +componentDef);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + appModule+'\n' +controller +'\n' +componentDef);
 
 					//uncomment this line if you want service in common components.
-					file.writeFileSync(directoryToComponent+'/'+componentName+'Service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
 
-					file.writeFileSync(directoryToComponent+'/'+componentName+'Controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass +'\n'+ cssMediaQueries);
 

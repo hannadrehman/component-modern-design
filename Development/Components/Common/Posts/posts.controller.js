@@ -9,7 +9,7 @@ function postsCtr(postsService){
 	self.posts={
 		listOfPosts:[]
 	};
-	self.$onInit=function(){
+	// self.$onInit=function(){
 		console.log('init function is working');
 		postsService.getPosts({
 			success:function(data){
@@ -21,7 +21,9 @@ function postsCtr(postsService){
 			}
 		});
 
-	};
+	// };
+
+
 	self.$onChanges=function(){
 		// console.log('change function is working');
 
