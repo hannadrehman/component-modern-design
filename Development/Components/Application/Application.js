@@ -7,9 +7,15 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRo
 	$urlRouterProvider.otherwise('/');
 }]);
 
-app.component('application',{
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
+app.component('application',new applicationConfig());
+
+function applicationConfig(){
+	this.controller=componentController;
+	this.template=function($templateCache){
 		return $templateCache.get('Application/Application.html');
-	}]
-});
+	};
+	this.template.$inject=['$templateCache'];
+	this.controllerAs='application';
+	this.bindings={};
+	this.require={};
+}

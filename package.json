@@ -4,15 +4,26 @@
   "description": "Angular component architecture for front end development",
   "main": "production/index.html",
   "scripts": {
-    "test": "hannad rehman",
-    "gulp": "gulp"
+    "start": "gulp",
+    "add-view": "gulp view-component --options",
+    "add-common":"gulp common-component --options"
   },
   "repository": {
     "type": "git",
-    "url": "none"
+    "url": "https://github.com/hannadrehman/Hangular-moderndesign.git"
   },
   "keywords": [
-    "KM",
+    "angularjs",
+    "angular component",
+    "angularjs component architecture",
+    "angular1.5",
+    "components",
+    "web parts",
+    "web components",
+    "reactjs",
+    "gulpangular",
+    "nodejs",
+    "browserify",
     "Recomendation"
   ],
   "author": "Hannad Rehman",

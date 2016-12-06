@@ -315,18 +315,19 @@ gulp.task('view-component',function(){
 		//please be carefull about this. this is the route template and should match component definition
 	});
 }]);
-
-app.component('`+componentName+`',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
-
-	//we are using angular template cache service to cache all our templates/partials.
-	//this syntax should not be touched because gulp will covert partials in this service data.
-
-	template:['$templateCache',function($templateCache){
+app.component('`+componentName+`',new `+componentName+`Config());
+//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+//we are using angular template cache service to cache all our templates/partials.
+//this syntax should not be touched because gulp will covert partials in this service data.
+function `+componentName+`Config(){
+  this.controller=componentController;
+  this.template=function($templateCache){
 		return $templateCache.get('Views/`+cName+'/'+componentName+`.html');
-	}]
-});`
+	};
+  this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={};
+}`
 					//controller file for the componenet
 					var componentController=`
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -360,7 +361,7 @@ function factoryMethods(http){
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.service'+'.js','//Author : Hannad Rehman ' + new Date() +'\n'+appModule+'\n' +componentService);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/ \n' +componentSass +'\n' + cssMediaQueries);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/ \n' +componentSass );
 					console.log('successfully created component ',componentName);
 
 				}
@@ -404,13 +405,19 @@ gulp.task('common-component',function(){
 
 					// creates component with its route and component definition aling with the controller.
 					var componentDef=`
-app.component('`+componentName+`',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
+app.component('`+componentName+`',new `+componentName+`Config());
+//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+//we are using angular template cache service to cache all our templates/partials.
+//this syntax should not be touched because gulp will covert partials in this service data.
+function `+componentName+`Config(){
+  this.controller=componentController;
+  this.template=function($templateCache){
 		return $templateCache.get('Common/`+cName+'/'+componentName+`.html');
-	}]
-});`
+	};
+  this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={};
+}`
 
 
 					//uncomment the below lines if you want to inject module details into common component service.
@@ -451,7 +458,7 @@ function `+componentName+`Ctr(){
 
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.controller'+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + componentController);
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.html','<!-- Author : Hannad Rehman ' + new Date() +'-->' +'\n' +componentDummyHtml);
-					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass +'\n'+ cssMediaQueries);
+					file.writeFileSync(directoryToComponent+'/'+componentName+'.scss','/* Author : Hannad Rehman ' + new Date() +'*/' +'\n'+componentSass );
 
 					console.log('successfully created component ',componentName);
 				}
@@ -508,127 +515,3 @@ gulp.task('image',function(){
 	.pipe(imagemin({progressive:true}))
 	.pipe(gulp.dest('Production/Images'));
 	});
-	var cssMediaQueries =`
-	/* Desktops and laptops ----------- */
-	@media only screen  and (min-width : 1224px) {
-	/* Styles */
-	}
-
-	/* Large screens ----------- */
-	@media only screen  and (min-width : 1824px) {
-	/* Styles */
-	}
-
-	/* Smartphones (portrait and landscape) ----------- */
-	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-	/* Styles */
-	}
-
-	/* Smartphones (landscape) ----------- */
-	@media only screen and (min-width : 321px) {
-	/* Styles */
-	}
-
-	/* Smartphones (portrait) ----------- */
-	@media only screen and (max-width : 320px) {
-	/* Styles */
-	}
-
-	/* iPads (portrait and landscape) ----------- */
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-	/* Styles */
-	}
-
-	/* iPads (landscape) ----------- */
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
-	and (orientation : landscape) {
-	/* Styles */
-	}
-
-	/* iPads (portrait) ----------- */
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
-	and (orientation : portrait) {
-	/* Styles */
-	}
-	/**********
-	iPad 3
-	**********/
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
-	and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
-	and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
-	/* Styles */
-	}
-
-
-	/* iPhone 4 ----------- */
-	@media only screen and (min-device-width : 320px) and (max-device-width : 480px)
-	and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width : 320px) and (max-device-width : 480px)
-	and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
-	/* Styles */
-	}
-
-	/* iPhone 5 ----------- */
-	@media only screen and (min-device-width: 320px) and (max-device-height: 568px)
-	and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width: 320px) and (max-device-height: 568px)
-	and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-	/* Styles */
-	}
-
-	/* iPhone 6 ----------- */
-	@media only screen and (min-device-width: 375px) and (max-device-height: 667px)
-	and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width: 375px) and (max-device-height: 667px)
-	and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-	/* Styles */
-	}
-
-	/* iPhone 6+ ----------- */
-	@media only screen and (min-device-width: 414px) and (max-device-height: 736px)
-	and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width: 414px) and (max-device-height: 736px)
-	and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
-	/* Styles */
-	}
-
-	/* Samsung Galaxy S4 ----------- */
-	@media only screen and (min-device-width: 320px) and (max-device-height: 640px)
-	and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width: 320px) and (max-device-height: 640px)
-	and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
-	/* Styles */
-	}
-
-	/* Samsung Galaxy S5 ----------- */
-	@media only screen and (min-device-width: 360px) and (max-device-height: 640px)
-	and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
-	/* Styles */
-	}
-
-	@media only screen and (min-device-width: 360px) and (max-device-height: 640px)
-	and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
-	/* Styles */
-	}
-
-
-	`

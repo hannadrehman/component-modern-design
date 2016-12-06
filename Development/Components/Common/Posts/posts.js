@@ -3,13 +3,18 @@
 var app=require('../../../../Development/Assets/Js/appConfig');
 var componentController=require('./posts.controller');
 
-app.component('posts',{
+app.component('posts',new postsConfig());
+
+function postsConfig() {
 	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
+	//templates are stored in templatecache service by gulp. so we require them from in this syntax;
+	this.controller=componentController;
+	this.template=function($templateCache){
 		return $templateCache.get('Common/Posts/posts.html');
-	}],
-	require:{
+	};
+	this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={
 		parent:'^^home'
-	}
-});
+	};
+}

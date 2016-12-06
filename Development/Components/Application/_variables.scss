@@ -1,8 +1,108 @@
-$pink:pink;
-
-@mixin simple-all-css-transition($time){
-	 -webkit-transition: all $time ease-out ;
-    -moz-transition: all $time ease-out ;
-    -o-transition: all $time ease-out ;
-    transition: all $time ease-out ;
-}
+$desktop:'only screen  and (min-width : 1224px)';
+$large-desktop:'only screen  and (min-width : 1824px)';
+$smart-phone-port:'only screen and (max-width : 320px)';
+$smart-phone-land:'only screen and (min-width : 321px)';
+$iphone-4-port:'only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2)';
+$iphone-4-land:'only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2)';
+$iphone-5-port:'only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2)';
+$iphone-5-land:'only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2)';
+$iphone-6-port:'only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2)';
+$iphone-6-land:'only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2)';
+$iphone-6-plus-port:'only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2)';
+$iphone-6-plus-land:'only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2)';
+$s-4-port:'only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3)';
+$s-4-land:'only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3)';
+$s-5-port:'only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3)';
+$s-5-land:'only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3)';
+$ipad-port:'only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait)';
+$ipad-land:'only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape)';
+@mixin bp-desktop {
+  @media #{$desktop}{
+    @content
+  }
+};
+@mixin bp-large-desktop {
+  @media #{$large-desktop}{
+    @content
+  }
+};
+@mixin bp-smart-phone-port {
+  @media #{$smart-phone-port}{
+    @content
+  }
+};
+@mixin bp-smart-phone-land {
+  @media #{$smart-phone-land}{
+    @content
+  }
+};
+@mixin bp-iphone-4-port {
+  @media #{$iphone-4-port}{
+    @content
+  }
+};
+@mixin bp-iphone-4-land {
+  @media #{$iphone-4-land}{
+    @content
+  }
+};
+@mixin bp-iphone-5-port {
+  @media #{$iphone-5-port}{
+    @content
+  }
+};
+@mixin bp-iphone-5-land {
+  @media #{$iphone-5-land}{
+    @content
+  }
+};
+@mixin bp-iphone-6-port {
+  @media #{$iphone-6-port}{
+    @content
+  }
+};
+@mixin bp-iphone-6-land {
+  @media #{$iphone-6-land}{
+    @content
+  }
+};
+@mixin bp-iphone-6p-port {
+  @media #{$iphone-6-plus-port}{
+    @content
+  }
+};
+@mixin bp-iphone-6p-land {
+  @media #{$iphone-6-plus-land}{
+    @content
+  }
+};
+@mixin bp-s-4-port {
+  @media #{$s-4-port}{
+    @content
+  }
+};
+@mixin bp-s-4-land {
+  @media #{$s-4-land}{
+    @content
+  }
+};
+@mixin bp-s-5-port {
+  @media #{$s-5-port}{
+    @content
+  }
+};
+@mixin bp-s-5-land {
+  @media #{$s-5-land}{
+    @content
+  }
+};
+@mixin bp-ipad-port {
+  @media #{$ipad-port}{
+    @content
+  }
+};
+@mixin bp-ipad-land {
+  @media #{$ipad-land}{
+    @content
+  }
+};

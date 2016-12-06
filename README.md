@@ -95,7 +95,7 @@ Hangular-moderndesign
 |     |     |
 |     |     |----Js
 |     |     |    |----appConfig.js // angular module definition is done here.
-      |     |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here.
+|     |     |    |----vendor.js //all external Js libraries and dependencies for angular module like uiRouter are required here.
 |     |     |---Images
 |     |          |--- // all images for dev are kept here.
 |     |
@@ -171,11 +171,21 @@ There are 2 types of components in this framework:
 1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. They have their own Html,scss/css,definition,routing,controller and Services. With this, these pages/components becomes completely independent. And if working in a team,  different members can be working on different components. they will not interfere in other team members work. all the webservice calls for the component will be made in the component service.js file and to display the data it will be passed into the "Common component". ```<my-post post-data="$ctrl.posts"></my-posts>```
 to Create a new view Component there is a simple command written. open Terminal/cmd in the root folder and type this command
 ```
+npm run add-view ViewName //ViewName is your page name/routename/partial/view etc
+//NOTE : ViewName should be pascal cased.
+```
+OR
+```
 gulp view-component --options ComponentName
 ```
 
 2. Common : these are the reusable components with act as seperate web parts. you can pass data objects into them and from the parent controller display. or you can call the data from the seperate webservices and represent them. you would need use angular lifecycle hooks to handle the data. like $onInit(),$onChange(),$onDestroy() etc.these components have their own html,css,definition,service and controllers.
 to Create a new Common Component there is a simple command written. Open Terminal/cmd in the root folder and type this command
+```
+npm run add-view CommonComponentName //CommonComponentName is your component/widget/web part etc name.
+//NOTE : CommonComponentName should be pascal cased.
+```
+OR
 ```
 gulp common-component --options ComponentName
 ```
@@ -250,10 +260,19 @@ Application component contains :
 7._components.scss : Sass partials for css components like buttons,table , accordion etc
 
 8._variable.scss : All sass varables should be written here.
+NOTE: i have already included all device media queries variables/mixins in _variable.scss files.
 
 
 ##How to Start.
 Once all the dependencies have been installed you can start the project by simply typing this command in CMD/terminal in the root folder.
+```
+npm start
+```
+OR
+```
+npm run start
+```
+OR
 ```
 gulp
 ```
@@ -273,9 +292,39 @@ gulp image
 
 ##Gulpfile.js
 All the automation and task building work is done in gulpfile.js
-there are specific gulp taks defined in this file that takes care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production.these are :
+there are specific gulp taks defined in this file that takes care of the automation and build process. some of the features are commented out and some need to be commented when finally taking the code to production.
+Proper Error handeling is done. if anything goes wrong, you will hear a Beep sound (in windows os only) when error or warnings occur. it is advised to try to solve or fix all the possible errors and warnings.
 
 
+All the task names are listed below :
+1. default : this is te default gulp task that runs all other tasks when gulp is loaded and also invokes "watch" task
+
+2. watch : this task watches all the files for the changes, if change occured (by saving the file) the corosponding task will be invoked. this keeps all files upto date in production folder.
+
+3. jshint : provides javascript code errors and warnings with a beep sound if code mistake is made.
+
+4. build-css : compiles Sass,coppies files to bundle.css
+
+5. browser-sync : automatically refreshes browser when change occurs.
+
+6. build-component-js : Converts Component Js files to bundle.js.
+
+7. build-vendor-js : converts all Js libraries to vendor.js.
+
+8. build-vendor-css : converts all Css libraries to vendor.css.
+
+9. view-component : creates a new View component that is the component with route. all required css,js,html files are automatically created by this command.
+
+10. common-component : creates a new common component that is the component that displays data. all required css,js,html files are automatically created by this command.
+
+11. build-template-cache : creates a new angular app as templateCache and pushes all html templates of components to this app. every html files in the compoenent is cached by this.
+
+12. image : this task coppies and optimizes all images placed in Asset folder to the production folder.
+
+
+
+
+NOTE: Some of the tasks features are commented. please uncomment them when taking the code to production.
 1.the task build-component-js has uglify() feature commented. uncomment it while finally taking code to production and build it.
 
-2.the taks build-component-js has sourcemaps.write() is uncommented. comment it and build the code before taking to production because size of the file bundle.js gets increase due to source maps.
+2.the taks build-component-js has sourcemaps.write() is uncommented. comment it and build the code before taking to production because size of the file bundle.js gets increase due to source maps. also delete the source maps in all the css,js files in the production folder. the source maps are located at the bottom of each file and should be removed if you dont want to do debuging in original files.

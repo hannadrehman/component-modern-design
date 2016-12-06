@@ -6,7 +6,7 @@ module.exports=app;
 applicationCtr.$inject=['applicationService'];
 function applicationCtr(applicationService){
 	console.log('parent component is up and working');
-	
+	this.me='hannad';
 }
 
 module.exports=applicationCtr;
@@ -21,12 +21,18 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRo
 	$urlRouterProvider.otherwise('/');
 }]);
 
-app.component('application',{
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
+app.component('application',new applicationConfig());
+
+function applicationConfig(){
+	this.controller=componentController;
+	this.template=function($templateCache){
 		return $templateCache.get('Application/Application.html');
-	}]
-});
+	};
+	this.template.$inject=['$templateCache'];
+	this.controllerAs='application';
+	this.bindings={};
+	this.require={};
+}
 
 },{"../../../Development/Assets/Js/appConfig":1,"./Application.controller":2}],4:[function(require,module,exports){
 //Author : Hannad Rehman Mon Nov 07 2016 12:06:52 GMT+0530 (India Standard Time)
@@ -42,43 +48,6 @@ function factoryMethods(http){
 }
 
 },{"../../../Development/Assets/Js/appConfig":1}],5:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:21:21 GMT+0530 (IST)
-
-//uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
-hannadCtr.$inject=['hannadService'];
-function hannadCtr(hannadService){
-	console.log('hannad component is up and working');
-	console.log(hannadService.functionName);
-}
- module.exports=hannadCtr;
-
-},{}],6:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:21:21 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent 
-var app=require('../../../../Development/Assets/Js/appConfig');
-var componentController=require("./hannad.controller");
-
-app.component('hannad',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
-		return $templateCache.get('Common/Hannad/hannad.html');
-	}]
-});
-},{"../../../../Development/Assets/Js/appConfig":1,"./hannad.controller":5}],7:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:21:21 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent 
-var app=require('../../../../Development/Assets/Js/appConfig');
-app.factory('hannadService',hannadFactory);
-hannadFactory.$inject=['$http'];
-function hannadFactory($http){
-return new factoryMethods($http);
-}
-function factoryMethods(http){
-this.functionName='hello this is a factory function';
-}
-
-},{"../../../../Development/Assets/Js/appConfig":1}],8:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:30:26 GMT+0530 (IST)
 
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -116,24 +85,29 @@ function postsCtr(postsService){
 }
  module.exports=postsCtr;
 
-},{}],9:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:30:26 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require('../../../../Development/Assets/Js/appConfig');
 var componentController=require('./posts.controller');
 
-app.component('posts',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
-		return $templateCache.get('Common/Posts/posts.html');
-	}],
-	require:{
-		parent:'^^home'
-	}
-});
+app.component('posts',new postsConfig());
 
-},{"../../../../Development/Assets/Js/appConfig":1,"./posts.controller":8}],10:[function(require,module,exports){
+function postsConfig() {
+	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+	//templates are stored in templatecache service by gulp. so we require them from in this syntax;
+	this.controller=componentController;
+	this.template=function($templateCache){
+		return $templateCache.get('Common/Posts/posts.html');
+	};
+	this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={
+		parent:'^^home'
+	};
+}
+
+},{"../../../../Development/Assets/Js/appConfig":1,"./posts.controller":5}],7:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:30:26 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require('../../../../Development/Assets/Js/appConfig');
@@ -161,7 +135,7 @@ function factoryMethods(http){
 	};
 }
 
-},{"../../../../Development/Assets/Js/appConfig":1}],11:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1}],8:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:20:39 GMT+0530 (IST)
 
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -170,21 +144,27 @@ function navigationCtr(){
 	console.log('navigation component is up and working');
 }
  module.exports=navigationCtr;
-},{}],12:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:20:39 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require('../../../../Development/Assets/Js/appConfig');
 var	componentController=require('./navigation.controller');
 
-app.component('navigation',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
-	template:['$templateCache',function($templateCache){
-		return $templateCache.get('Common/navigation/navigation.html');
-	}]
-});
+app.component('navigation',new navigationConfig());
 
-},{"../../../../Development/Assets/Js/appConfig":1,"./navigation.controller":11}],13:[function(require,module,exports){
+function navigationConfig() {
+	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+	//templates are stored in templatecache service by gulp. so we require them from in this syntax;
+	this.controller=componentController;
+	this.template=function($templateCache){
+		return $templateCache.get('Common/navigation/navigation.html');
+	};
+	this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={};
+}
+
+},{"../../../../Development/Assets/Js/appConfig":1,"./navigation.controller":8}],10:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:20:39 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent 
 var app=require('../../../../Development/Assets/Js/appConfig');
@@ -194,31 +174,16 @@ app.factory('navigationService',['$http',function($http){
 		functionName:'functionD definition'
 	};
 }]);
-},{"../../../../Development/Assets/Js/appConfig":1}],14:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:17:21 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent
-var app=require("../../../../Development/Assets/Js/appConfig");
-app.factory('hannadService',hannadFactory);
-hannadFactory.$inject=['$http'];
-function hannadFactory($http){
-	return new factoryMethods($http);
-}
-function factoryMethods(http){
-	this.functionName='hello this is a factory function';
-}
-					
-
-},{"../../../../Development/Assets/Js/appConfig":1}],15:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1}],11:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:17:09 GMT+0530 (IST)
-
-
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
-//homeCtr.$inject=[];
-function homeCtr(){
+homeCtr.$inject=['homeService'];
+function homeCtr(homeService){
 	console.log('home component is up and working');
 }
  module.exports=homeCtr;
-},{}],16:[function(require,module,exports){
+
+},{}],12:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:17:09 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require("../../../../Development/Assets/Js/appConfig");
@@ -233,19 +198,23 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRo
 	});
 }]);
 
-app.component('home',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
 
-	//we are using angular template cache service to cache all our templates/partials.
-	//this syntax should not be touched because gulp will covert partials in this service data.
+app.component('home',new homeComponent());
 
-	template:['$templateCache',function($templateCache){
+function homeComponent(){
+	// 	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+	// 	//we are using angular template cache service to cache all our templates/partials.
+	// 	//this syntax should not be touched because gulp will covert partials in this service data.
+	this.controller=componentController;
+	this.template=function($templateCache){
 		return $templateCache.get('Views/Home/home.html');
-	}]
-});
+	};
+	this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={};
+}
 
-},{"../../../../Development/Assets/Js/appConfig":1,"./home.controller":15}],17:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1,"./home.controller":11}],13:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:17:09 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require("../../../../Development/Assets/Js/appConfig");
@@ -256,10 +225,10 @@ function homeFactory($http){
 	return new factoryMethods($http);
 }
 function factoryMethods(http){
-	this.functionName='hello this is a factory function';
+	this.functionName=console.log('hi');
 }
 
-},{"../../../../Development/Assets/Js/appConfig":1}],18:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1}],14:[function(require,module,exports){
 //Author : Hannad Rehman Mon Dec 05 2016 00:31:56 GMT+0530 (IST)
 
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -268,9 +237,9 @@ function profileCtr(){
 	console.log('profile component is up and working');
 }
  module.exports=profileCtr;
-},{}],19:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 //Author : Hannad Rehman Mon Dec 05 2016 00:31:56 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent 
+// this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require("../../../../Development/Assets/Js/appConfig");
 var componentController=require("./profile.controller");
 //routing of component done here. change url and state if you want custome routes/parameters etc
@@ -282,18 +251,19 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRo
 	});
 }]);
 
-app.component('profile',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
+app.component('profile',new profileConfig());
 
-	//we are using angular template cache service to cache all our templates/partials.
-	//this syntax should not be touched because gulp will covert partials in this service data.
-
-	template:['$templateCache',function($templateCache){
+function profileConfig() {
+	this.controller=componentController;
+	this.template=function($templateCache){
 		return $templateCache.get('Views/Profile/profile.html');
-	}]
-});
-},{"../../../../Development/Assets/Js/appConfig":1,"./profile.controller":18}],20:[function(require,module,exports){
+	};
+	this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={};
+}
+
+},{"../../../../Development/Assets/Js/appConfig":1,"./profile.controller":14}],16:[function(require,module,exports){
 //Author : Hannad Rehman Mon Dec 05 2016 00:31:56 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent 
 var app=require("../../../../Development/Assets/Js/appConfig");
@@ -310,4 +280,4 @@ function factoryMethods(http){
 	this.functionName='hello this is a factory function';
 }
 					
-},{"../../../../Development/Assets/Js/appConfig":1}]},{},[2,3,4,5,6,7,11,12,13,8,9,10,14,15,16,17,18,19,20]);
+},{"../../../../Development/Assets/Js/appConfig":1}]},{},[2,3,4,8,9,10,5,6,7,11,12,13,14,15,16]);

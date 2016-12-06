@@ -8,5 +8,5 @@ function homeFactory($http){
 	return new factoryMethods($http);
 }
 function factoryMethods(http){
-	this.functionName='hello this is a factory function';
+	this.functionName=console.log('hi');
 }

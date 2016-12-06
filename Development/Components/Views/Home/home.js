@@ -12,14 +12,18 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRo
 	});
 }]);
 
-app.component('home',{
-	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	controller:componentController,
 
-	//we are using angular template cache service to cache all our templates/partials.
-	//this syntax should not be touched because gulp will covert partials in this service data.
+app.component('home',new homeComponent());
 
-	template:['$templateCache',function($templateCache){
+function homeComponent(){
+	// 	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+	// 	//we are using angular template cache service to cache all our templates/partials.
+	// 	//this syntax should not be touched because gulp will covert partials in this service data.
+	this.controller=componentController;
+	this.template=function($templateCache){
 		return $templateCache.get('Views/Home/home.html');
-	}]
-});
+	};
+	this.template.$inject=['$templateCache'];
+	this.bindings={};
+	this.require={};
+}
