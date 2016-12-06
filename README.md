@@ -240,17 +240,18 @@ we have 3 sub folder in Assets.
 
 	3.b. vendor.js: this file contains all the Js libraries required for this app. like angularjs,uirouter etc.
 we are using node requrie syntax to get the libraries.
+```
+var angular=require('angular');
 
-	var angular=require('angular');
-
-	var router=require('angular-ui-router');
+var router=require('angular-ui-router');
+```
 
    NOTE : here we have downloaded angular from npm and required it with node syntax. all the required files will be exported as vendor.js to production folder and will contain all the libraries minifies/uglified.
    please make sure that all the libraries are un-minified/uglified . gulp is going to the uglification task for us.
 
-
-	npm install --save-dev angular
-
+```
+npm install --save-dev angular
+```
 
 #The Entry Point.
 The entry point of this application is the "Application Component".This is the root of the application and is included in your development/index.html . This is basically an entry point component and inside this component template we start our web application. All other components will inherit from this component as being parent of all.
