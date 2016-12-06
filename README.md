@@ -171,7 +171,9 @@ There are 2 types of components in this framework:
 1. Views (partials) : these are the pages/views that change on routing,ex home page,profile page ,about page etc. all these pages/views/partials are identified as components. They have their own Html,scss/css,definition,routing,controller and Services. With this, these pages/components becomes completely independent. And if working in a team,  different members can be working on different components. they will not interfere in other team members work. all the webservice calls for the component will be made in the component service.js file and to display the data it will be passed into the "Common component". ```<my-post post-data="$ctrl.posts"></my-posts>```
 to Create a new view Component there is a simple command written. open Terminal/cmd in the root folder and type this command
 ```
-npm run add-view ViewName //ViewName is your page name/routename/partial/view etc
+npm run add-view ViewName
+
+//ViewName is your page name/routename/partial/view etc
 //NOTE : ViewName should be pascal cased.
 ```
 OR
@@ -182,7 +184,9 @@ gulp view-component --options ComponentName
 2. Common : these are the reusable components with act as seperate web parts. you can pass data objects into them and from the parent controller display. or you can call the data from the seperate webservices and represent them. you would need use angular lifecycle hooks to handle the data. like $onInit(),$onChange(),$onDestroy() etc.these components have their own html,css,definition,service and controllers.
 to Create a new Common Component there is a simple command written. Open Terminal/cmd in the root folder and type this command
 ```
-npm run add-view CommonComponentName //CommonComponentName is your component/widget/web part etc name.
+npm run add-view CommonComponentName
+
+//CommonComponentName is your component/widget/web part etc name.
 //NOTE : CommonComponentName should be pascal cased.
 ```
 OR
@@ -194,11 +198,29 @@ To bundle up the html partials we will be taking advantage of angular js $templa
 So using gulp we will automaticaly transfer and convert all html partials of the components into the angular template cache.
 ```
 app.component('albumPhotos',{
-	controller:['$stateParams','albumPhotosService',require('./albumPhotosController.js')],
+	controller:componentController,
 	template:['$templateCache',function($templateCache){
 		return $templateCache.get('Views/AlbumPhotos/albumPhotos.html');
-	}]
+	}],
+	bindings:{},
+	require:{}
 });
+```
+OR
+```
+app.component('myComponent',new myComponentConfig());
+function myComponentConfig(){
+	this.controller=componentController;
+	this.template=function($templateCache){
+			return $templateCache.get('Views/myComponent/myComponent.html');
+	}
+	this.templateCache.$inject=['$templateCache'];
+	//this is to inject dependencies into the function so that we dont lose
+	//it on minification/uglification
+	this.bindings={};
+	this.require={};
+
+}
 ```
 to read about template cache here is a good reference : https://thinkster.io/templatecache-tutorial
 
@@ -215,19 +237,17 @@ we have 3 sub folder in Assets.
 
         2.vendor.js: this file contains all the Js libraries required for this app. like angularjs,uirouter etc.
         we are using node requrie syntax to get the libraries.
-
-        ```
-        //angularjs module starts here
-        var angular=require('angular');
-        //angular ui route module starts ere
-        var router=require('angular-ui-router');
-         ```
-
+							```
+							//angularjs module starts here
+			        var angular=require('angular');
+			        //angular ui route module starts ere
+			        var router=require('angular-ui-router');
+			        ```
          NOTE : here we have downloaded angular from npm and required it with node syntax. all the required files will be exported as vendor.js to production folder and will contain all the libraries minifies/uglified.
          please make sure that all the libraries are un-minified/uglified . gulp is going to the uglification task for us.
-         ```
-         npm install --save-dev angular
-         ```
+				         ```
+				         npm install --save-dev angular
+				         ```
 
 
 #The Entry Point.
