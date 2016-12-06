@@ -232,10 +232,10 @@ we have 3 sub folder in Assets.
 2.Images : this contains all Development images for the project. like logo,copyright images etc.
 
 3.Js : This is an important folder. it contains 2 main Js files.
-        1.appConfig.js : this file contains the angular module definition which is referenced in all the component files. all the depending modules are injected here in the angular app, like ui-router.
-        NOTE: here we are using templateCache module as first DI, DO NOT remove it. because we are using angular template cache to optimize the html partials and they are taken into a seperate angular app 'templateCache'. this needs to be there otherwise app will fail.
 
-        2.vendor.js: this file contains all the Js libraries required for this app. like angularjs,uirouter etc.
+				1.appConfig.js : this file contains the angular module definition which is referenced in all the component files. all the depending modules are injected here in the angular app, like ui-router.
+        NOTE: here we are using templateCache module as first DI, DO NOT remove it. because we are using angular template cache to optimize the html partials and they are taken into a seperate angular app 'templateCache'. this needs to be there otherwise app will fail.
+				2.vendor.js: this file contains all the Js libraries required for this app. like angularjs,uirouter etc.
         we are using node requrie syntax to get the libraries.
 
 							//angularjs module starts here
@@ -247,7 +247,7 @@ we have 3 sub folder in Assets.
          please make sure that all the libraries are un-minified/uglified . gulp is going to the uglification task for us.
 
 				         npm install --save-dev angular
-				         
+
 
 
 #The Entry Point.
