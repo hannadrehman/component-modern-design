@@ -241,17 +241,15 @@ we have 3 sub folder in Assets.
 	3.b. vendor.js: this file contains all the Js libraries required for this app. like angularjs,uirouter etc.
 we are using node requrie syntax to get the libraries.
 
-```
 	var angular=require('angular');
 
 	var router=require('angular-ui-router');
-```
+
    NOTE : here we have downloaded angular from npm and required it with node syntax. all the required files will be exported as vendor.js to production folder and will contain all the libraries minifies/uglified.
    please make sure that all the libraries are un-minified/uglified . gulp is going to the uglification task for us.
 
-```
+
 	npm install --save-dev angular
-```
 
 
 #The Entry Point.
