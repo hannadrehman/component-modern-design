@@ -1,4 +1,4 @@
-# Hangular-moderndesign
+# Angular-component-modern-design
 
 ##Synopsis
 
