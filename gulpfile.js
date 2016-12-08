@@ -327,6 +327,7 @@ function `+componentName+`Config(){
   this.template.$inject=['$templateCache'];
 	this.bindings={};
 	this.require={};
+	this.controllerAs='`+componentName+`';
 }`
 					//controller file for the componenet
 					var componentController=`
@@ -339,21 +340,21 @@ function `+componentName+`Ctr(){
 					//injects  service with app module created into new component service created.
 					var componentService=`app.factory('`+componentName+`Service',`+componentName+`Factory);
 //dependency injection goes here. all the services that are needed by this factory
-`+componentName+`Factory.$inject=['$http'];
-function `+componentName+`Factory($http){
+`+componentName+`Factory.$inject=['applicationService'];
+function `+componentName+`Factory(applicationService){
 	//a factory function returns a singleton object.
-	return new factoryMethods($http);
+	return new factoryMethods(applicationService);
 }
 //this function contains all the factory methods,or service call methods here.
 //web service call functions should be declared here with this.functionname(){} foramt.
-function factoryMethods(http){
+function factoryMethods(appService){
 	this.functionName='hello this is a factory function';
 }
 					`
 					//this is the basic html template for the new component
 					var  componentDummyHtml='<h1>hello you have successfully created &nbsp;'+componentName+ '&nbsp; component</h1>';
 					//this includes imports in the saas file . imports are from application component. as the root
-					var componentSass='@import "../../Application/colors.scss"; \n @import "../../Application/variables.scss";'
+					var componentSass='@import "../../Application/colors.scss"; \n@import "../../Application/variables.scss";\n@import "../../Application/mixins.scss"'
 
 
 					//creating new files and injecting the required data into them/
@@ -417,6 +418,7 @@ function `+componentName+`Config(){
   this.template.$inject=['$templateCache'];
 	this.bindings={};
 	this.require={};
+	this.controllerAs='`+componentName+`';
 }`
 
 
@@ -426,14 +428,14 @@ function `+componentName+`Config(){
 
 var componentService=`app.factory('`+componentName+`Service',`+componentName+`Factory);
 //dependency injection goes here. all the services that are needed by this factory
-`+componentName+`Factory.$inject=['$http'];
-function `+componentName+`Factory($http){
+`+componentName+`Factory.$inject=['applicationService'];
+function `+componentName+`Factory(applicationService){
 	//a factory function returns a singleton object.
-	return new factoryMethods($http);
+	return new factoryMethods(applicationService);
 }
 //this function contains all the factory methods,or service call methods here.
 //web service call functions should be declared here with this.functionname(){} foramt.
-function factoryMethods(http){
+function factoryMethods(appService){
 	this.functionName='hello this is a factory function';
 }
 `
@@ -449,7 +451,7 @@ function `+componentName+`Ctr(){
 		//this is the basic html template for the new component
 					var  componentDummyHtml='<h1>hello you have successfully created '+componentName+ ' component</h1>';
 					//this includes imports in the saas file . imports are from application component. as the root
-					var componentSass='@import "../../Application/colors.scss"; \n @import "../../Application/variables.scss";'
+					var componentSass='@import "../../Application/colors.scss"; \n@import "../../Application/variables.scss";\n@import "../../Application/variables.scss";'
 
 					file.writeFileSync(directoryToComponent+'/'+componentName+'.js','//Author : Hannad Rehman ' + new Date() +'\n' + appModule+'\n' +controller +'\n' +componentDef);
 

@@ -1,0 +1,48 @@
+/* Author : Hannad Rehman Wed Dec 07 2016 00:51:22 GMT+0530 (IST)*/
+@import "../../Application/colors.scss";
+ @import "../../Application/variables.scss";
+ @import "../../Application/mixins.scss";
+
+
+ .gif-container{
+   position: relative;
+   .gif-nav{
+     padding: 0;
+     display: inline;
+     position: relative;
+     li{
+       display: inline-block;
+       padding: 10px;
+       color:black;
+       font-weight: bold;
+       border: 1px solid lightgray;
+       cursor: pointer;
+     }
+     li:hover{
+       background-color: darkgray;
+     }
+   }
+   .inner-views{
+     position: relative;
+     width: 80%;
+     margin: auto;
+     .search-box{
+       position: relative;
+       .form-control{
+         width: 300px;
+         display: inline;
+       }
+       .btn{
+         display: inline-block;
+       }
+     }
+   }
+   .display-data{
+     .row{
+       text-align: center;
+     }
+     img{
+       margin: auto;
+     }
+   }
+ }

@@ -10,16 +10,16 @@ function postsCtr(postsService){
 		listOfPosts:[]
 	};
 	// self.$onInit=function(){
-		console.log('init function is working');
-		postsService.getPosts({
-			success:function(data){
-				self.posts.listOfPosts=data.data;
-				console.log(self.posts.listOfPosts);
-			},
-			error:function(data){
-				alert('error');
-			}
-		});
+		// console.log('init function is working');
+		// postsService.getPosts({
+		// 	success:function(data){
+		// 		self.posts.listOfPosts=data.data;
+		// 		console.log(self.posts.listOfPosts);
+		// 	},
+		// 	error:function(data){
+		// 		alert('error');
+		// 	}
+		// });
 
 	// };
 

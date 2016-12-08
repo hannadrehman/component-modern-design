@@ -1,0 +1,93 @@
+@import "colors.scss";
+@import "variables.scss";
+
+@mixin bp-desktop {
+  @media #{$desktop}{
+    @content
+  }
+};
+@mixin bp-large-desktop {
+  @media #{$large-desktop}{
+    @content
+  }
+};
+@mixin bp-smart-phone-port {
+  @media #{$smart-phone-port}{
+    @content
+  }
+};
+@mixin bp-smart-phone-land {
+  @media #{$smart-phone-land}{
+    @content
+  }
+};
+@mixin bp-iphone-4-port {
+  @media #{$iphone-4-port}{
+    @content
+  }
+};
+@mixin bp-iphone-4-land {
+  @media #{$iphone-4-land}{
+    @content
+  }
+};
+@mixin bp-iphone-5-port {
+  @media #{$iphone-5-port}{
+    @content
+  }
+};
+@mixin bp-iphone-5-land {
+  @media #{$iphone-5-land}{
+    @content
+  }
+};
+@mixin bp-iphone-6-port {
+  @media #{$iphone-6-port}{
+    @content
+  }
+};
+@mixin bp-iphone-6-land {
+  @media #{$iphone-6-land}{
+    @content
+  }
+};
+@mixin bp-iphone-6p-port {
+  @media #{$iphone-6-plus-port}{
+    @content
+  }
+};
+@mixin bp-iphone-6p-land {
+  @media #{$iphone-6-plus-land}{
+    @content
+  }
+};
+@mixin bp-s-4-port {
+  @media #{$s-4-port}{
+    @content
+  }
+};
+@mixin bp-s-4-land {
+  @media #{$s-4-land}{
+    @content
+  }
+};
+@mixin bp-s-5-port {
+  @media #{$s-5-port}{
+    @content
+  }
+};
+@mixin bp-s-5-land {
+  @media #{$s-5-land}{
+    @content
+  }
+};
+@mixin bp-ipad-port {
+  @media #{$ipad-port}{
+    @content
+  }
+};
+@mixin bp-ipad-land {
+  @media #{$ipad-land}{
+    @content
+  }
+};

@@ -108,6 +108,7 @@ Hangular-moderndesign
 |     |     |     |----_colors.scss.
 |     |     |     |----_variables.scss.
 |     |     |     |----_components.scss.
+|			|			|			|----_mixins.scss.
 |     |     |
 |     |     |----Common
 |     |     |     |----Navigation // reusable components like drop down list,nav,tables pictures,etc).
@@ -117,24 +118,20 @@ Hangular-moderndesign
 |     |     |     |       |----navigation.scss
 |     |     |     |       |----navigation.service.js
 |     |     |     |----YourModule
-|     |     |             |----yourModule.html
-|     |     |             |----yourModule.js
-|     |     |             |----yourModule.scss
-|     |     |             |----yourModule.controller.js
-|     |     |             |----yourModule.service.js
+|     |     |             |----gifDisplay.html
+|     |     |             |----gifDisplay.js
+|     |     |             |----gifDisplay.scss
+|     |     |             |----gifDisplay.controller.js
+|     |     |             |----gifDisplay.service.js
 |     |     |-----View
-|     |     |      |----Photos //all components that are used a Views/ pages/partials.
-|     |            |       |----photos.html
-|     |            |       |----photos.js
-|     |            |       |----photos.controller.js
-|     |            |       |----photos.service.Scss
-|     |            |       |----photos.scss
-|     |            |----Posts
-|     |                    |----posts.html
-|     |                    |----post.js
-|     |                    |----post.controller.js
-|     |                    |----post.service.js
-|     |                    |----post.scss
+|     |     |      |----gif //all components that are used a Views/ pages/partials.
+|     |            |       |----gif.html
+|     |            |       |----gif.js
+|     |            |       |----gif.controller.js
+|     |            |       |----gif.service.Scss
+|     |            |       |----gif.scss
+|     |            
+|			|
 |     |----index.html
 |
 |----Production
@@ -284,6 +281,8 @@ Application component contains :
 
 8._variable.scss : All sass varables should be written here.
 NOTE: i have already included all device media queries variables/mixins in _variable.scss files.
+9._mixins.scss : All Sass mixins should be written here.
+NOTE: these sass partials are automatically included in all component sass files.
 
 
 ##How to Start.

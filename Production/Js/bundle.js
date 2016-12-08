@@ -44,10 +44,158 @@ function applicationFactory($http){
 	return new factoryMethods($http);
 }
 function factoryMethods(http){
-  this.functionName='hello this is a factory function';
+  this.requestMaker=function(serviceObject,callback){
+		//request maker does the webservice call.. the callback functions success and error pass the data to the
+		//corrosponding service methods from where they are being called.
+		// structure of serviceObject={url:'',method:(1,2,3),data:{}}
+		//structure of callback={success:function(successData){},error:function(errorData){}}//
+		var serviceMethods={
+			1:'GET',
+			2:'POST',
+			3:'PUT',
+			4:'DELETE'
+		};
+		var webserviceConfig={
+			baseUrl:'',
+			post:''
+		};
+		if(serviceObject.url!=='' && serviceObject.url!==undefined && serviceObject.method!=='' && serviceObject.method!==undefined){
+			try {
+				http({
+					url:webserviceConfig.baseUrl+serviceObject.url,
+					method:serviceMethods[serviceObject.method],
+					data:serviceObject.data
+				}).then(function(successData){
+					if(typeof callback.success=="function"){
+						return callback.success(successData);
+						//returns the callback funtion from the service method
+					}
+				},function(errorData){
+					if(typeof callback.error=="function"){
+						return callback.error(errorData);
+					}
+				});
+			} catch (e) {
+				return callback.error({status:404,statusText:e});
+
+			}
+		}
+		else{
+			return callback.error({status:404,statusText:"Invalid Webservice Data Object"});
+
+		}
+	};
 }
 
 },{"../../../Development/Assets/Js/appConfig":1}],5:[function(require,module,exports){
+//Author : Hannad Rehman Wed Dec 07 2016 20:48:13 GMT+0530 (IST)
+
+//uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
+gifDisplayCtr.$inject=['gifDisplayService'];
+function gifDisplayCtr(gifDisplayService){
+	console.log('gifDisplay component is up and working');
+	var $this=this;
+	$this.data={
+		images:[]
+	};
+$this.$onInit=function(){
+	getData($this.type);
+};
+$this.$onChanges=function(changes){
+	getNewData(changes);
+};
+	function getData(type){
+		var serviceObj={
+			method:1,
+			data:{}
+		};
+		if(type=='trending'){
+			serviceObj.url='http://api.giphy.com/v1/gifs/'+$this.type+'?api_key=dc6zaTOxFJmzC';
+		}
+		else{
+			serviceObj.url='http://api.giphy.com/v1/gifs/'+$this.type+'?q'+$this.search+'=&api_key=dc6zaTOxFJmzC';
+		}
+
+		gifDisplayService.fetchGifs(serviceObj,{
+			success:function(data){
+				if(data.status==200){
+							$this.data.images=data.data.data;
+							console.log("Search",$this.data.images);
+						}
+			},
+			error:function(error){
+				alert(error.status);
+			}
+		});
+	}
+	function getNewData(changes) {
+		var a = changes;
+		console.log(a);
+		if (typeof changes.type.previousValue==='string') {
+				// if($this.type!==changes.type.currentValue){
+					$this.type=changes.type.currentValue;
+					getData($this.type);
+			// }
+			}
+
+	}
+}
+ module.exports=gifDisplayCtr;
+
+},{}],6:[function(require,module,exports){
+//Author : Hannad Rehman Wed Dec 07 2016 20:48:13 GMT+0530 (IST)
+// this is the node syntax of including js module. the Main js module is in applicationComponent
+var app=require('../../../../Development/Assets/Js/appConfig');
+var componentController=require("./gifDisplay.controller");
+
+app.component('gifDisplay',new gifDisplayConfig());
+//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+//we are using angular template cache service to cache all our templates/partials.
+//this syntax should not be touched because gulp will covert partials in this service data.
+function gifDisplayConfig(){
+  this.controller=componentController;
+  this.template=function($templateCache){
+		return $templateCache.get('Common/GifDisplay/gifDisplay.html');
+	};
+  this.template.$inject=['$templateCache'];
+	this.bindings={
+    type:'<'
+  };
+	this.require={};
+	this.controllerAs='gifDisplay';
+}
+
+},{"../../../../Development/Assets/Js/appConfig":1,"./gifDisplay.controller":5}],7:[function(require,module,exports){
+//Author : Hannad Rehman Wed Dec 07 2016 20:48:13 GMT+0530 (IST)
+// this is the node syntax of including js module. the Main js module is in applicationComponent
+var app=require('../../../../Development/Assets/Js/appConfig');
+app.factory('gifDisplayService',gifDisplayFactory);
+//dependency injection goes here. all the services that are needed by this factory
+gifDisplayFactory.$inject=['applicationService'];
+function gifDisplayFactory(applicationService){
+	//a factory function returns a singleton object.
+	return new factoryMethods(applicationService);
+}
+//this function contains all the factory methods,or service call methods here.
+//web service call functions should be declared here with this.functionname(){} foramt.
+function factoryMethods(appService){
+	this.fetchGifs=function(serviceObj,callback){
+		appService.requestMaker(serviceObj,{
+			success:function(successData){
+				if(typeof callback.success=='function'){
+					 return callback.success(successData);
+				}
+			},
+			error:function (errorData) {
+				if(typeof callback.error=='function'){
+					return callback.error(errorData);
+				}
+			}
+		});
+	};
+}
+
+},{"../../../../Development/Assets/Js/appConfig":1}],8:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:30:26 GMT+0530 (IST)
 
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -60,16 +208,16 @@ function postsCtr(postsService){
 		listOfPosts:[]
 	};
 	// self.$onInit=function(){
-		console.log('init function is working');
-		postsService.getPosts({
-			success:function(data){
-				self.posts.listOfPosts=data.data;
-				console.log(self.posts.listOfPosts);
-			},
-			error:function(data){
-				alert('error');
-			}
-		});
+		// console.log('init function is working');
+		// postsService.getPosts({
+		// 	success:function(data){
+		// 		self.posts.listOfPosts=data.data;
+		// 		console.log(self.posts.listOfPosts);
+		// 	},
+		// 	error:function(data){
+		// 		alert('error');
+		// 	}
+		// });
 
 	// };
 
@@ -85,7 +233,7 @@ function postsCtr(postsService){
 }
  module.exports=postsCtr;
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:30:26 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require('../../../../Development/Assets/Js/appConfig');
@@ -107,7 +255,7 @@ function postsConfig() {
 	};
 }
 
-},{"../../../../Development/Assets/Js/appConfig":1,"./posts.controller":5}],7:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1,"./posts.controller":8}],10:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:30:26 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require('../../../../Development/Assets/Js/appConfig');
@@ -135,7 +283,7 @@ function factoryMethods(http){
 	};
 }
 
-},{"../../../../Development/Assets/Js/appConfig":1}],8:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1}],11:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:20:39 GMT+0530 (IST)
 
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
@@ -144,7 +292,7 @@ function navigationCtr(){
 	console.log('navigation component is up and working');
 }
  module.exports=navigationCtr;
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:20:39 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require('../../../../Development/Assets/Js/appConfig');
@@ -164,7 +312,7 @@ function navigationConfig() {
 	this.require={};
 }
 
-},{"../../../../Development/Assets/Js/appConfig":1,"./navigation.controller":8}],10:[function(require,module,exports){
+},{"../../../../Development/Assets/Js/appConfig":1,"./navigation.controller":11}],13:[function(require,module,exports){
 //Author : Hannad Rehman Thu Dec 01 2016 23:20:39 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent 
 var app=require('../../../../Development/Assets/Js/appConfig');
@@ -174,110 +322,90 @@ app.factory('navigationService',['$http',function($http){
 		functionName:'functionD definition'
 	};
 }]);
-},{"../../../../Development/Assets/Js/appConfig":1}],11:[function(require,module,exports){
-//Author : Hannad Rehman Thu Dec 01 2016 23:17:09 GMT+0530 (IST)
-//uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
-homeCtr.$inject=['homeService'];
-function homeCtr(homeService){
-	console.log('home component is up and working');
-}
- module.exports=homeCtr;
-
-},{}],12:[function(require,module,exports){
-//Author : Hannad Rehman Thu Dec 01 2016 23:17:09 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent
-var app=require("../../../../Development/Assets/Js/appConfig");
-var componentController=require('./home.controller');
-
-//routing of component done here. change url and state if you want custome routes/parameters etc
-app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
-	$stateProvider.state('/',{
-			url:'/',
-		template:'<home></home>'
-		//please be carefull about this. this is the route template and should match component definition
-	});
-}]);
-
-
-app.component('home',new homeComponent());
-
-function homeComponent(){
-	// 	//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
-	// 	//we are using angular template cache service to cache all our templates/partials.
-	// 	//this syntax should not be touched because gulp will covert partials in this service data.
-	this.controller=componentController;
-	this.template=function($templateCache){
-		return $templateCache.get('Views/Home/home.html');
-	};
-	this.template.$inject=['$templateCache'];
-	this.bindings={};
-	this.require={};
-}
-
-},{"../../../../Development/Assets/Js/appConfig":1,"./home.controller":11}],13:[function(require,module,exports){
-//Author : Hannad Rehman Thu Dec 01 2016 23:17:09 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent
-var app=require("../../../../Development/Assets/Js/appConfig");
-
-app.factory('homeService',homeFactory);
-homeFactory.$inject=['$http'];
-function homeFactory($http){
-	return new factoryMethods($http);
-}
-function factoryMethods(http){
-	this.functionName=console.log('hi');
-}
-
 },{"../../../../Development/Assets/Js/appConfig":1}],14:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:31:56 GMT+0530 (IST)
+//Author : Hannad Rehman Wed Dec 07 2016 00:51:22 GMT+0530 (IST)
 
 //uncomment this line and add as a string to the array if you want to inject dependencies in your controller;
-//profileCtr.$inject=[];
-function profileCtr(){
-	console.log('profile component is up and working');
+gifCtr.$inject=['gifService'];
+function gifCtr(gifService){
+	console.log('gif component is up and working');
+	var $this=this;
+	$this.elements={
+		isSearchTxt:false,
+		type:'trending'
+	};
+	$this.navClick=function(data){
+		if(data=='search'){
+			$this.elements.isSearchTxt=true;
+			$this.elements.type=data;
+		}
+		else {
+				$this.elements.type=data;
+				$this.elements.isSearchTxt=false;
+
+		}
+
+	};
+
 }
- module.exports=profileCtr;
+ module.exports=gifCtr;
+
 },{}],15:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:31:56 GMT+0530 (IST)
+//Author : Hannad Rehman Wed Dec 07 2016 00:51:22 GMT+0530 (IST)
 // this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require("../../../../Development/Assets/Js/appConfig");
-var componentController=require("./profile.controller");
+var componentController=require("./gif.controller");
 //routing of component done here. change url and state if you want custome routes/parameters etc
 app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
-	$stateProvider.state('profile',{
-			url:'/profile',
-		template:'<profile></profile>'
+	$stateProvider.state('gif',{
+			url:'/',
+		template:'<gif></gif>'
 		//please be carefull about this. this is the route template and should match component definition
 	});
 }]);
-
-app.component('profile',new profileConfig());
-
-function profileConfig() {
-	this.controller=componentController;
-	this.template=function($templateCache){
-		return $templateCache.get('Views/Profile/profile.html');
+app.component('gif',new gifConfig());
+//if you want to inject dependencies intp your controller go to controller.js and use controllername.$inject=['yourservicename'];
+//we are using angular template cache service to cache all our templates/partials.
+//this syntax should not be touched because gulp will covert partials in this service data.
+function gifConfig(){
+  this.controller=componentController;
+  this.template=function($templateCache){
+		return $templateCache.get('Views/Gif/gif.html');
 	};
-	this.template.$inject=['$templateCache'];
+  this.template.$inject=['$templateCache'];
 	this.bindings={};
 	this.require={};
+	this.controllerAs='gif';
 }
 
-},{"../../../../Development/Assets/Js/appConfig":1,"./profile.controller":14}],16:[function(require,module,exports){
-//Author : Hannad Rehman Mon Dec 05 2016 00:31:56 GMT+0530 (IST)
-// this is the node syntax of including js module. the Main js module is in applicationComponent 
+},{"../../../../Development/Assets/Js/appConfig":1,"./gif.controller":14}],16:[function(require,module,exports){
+//Author : Hannad Rehman Wed Dec 07 2016 00:51:22 GMT+0530 (IST)
+// this is the node syntax of including js module. the Main js module is in applicationComponent
 var app=require("../../../../Development/Assets/Js/appConfig");
-app.factory('profileService',profileFactory);
+app.factory('gifService',gifFactory);
 //dependency injection goes here. all the services that are needed by this factory
-profileFactory.$inject=['$http'];
-function profileFactory($http){
+gifFactory.$inject=['applicationService'];
+function gifFactory(applicationService){
 	//a factory function returns a singleton object.
-	return new factoryMethods($http);
+	return new factoryMethods(applicationService);
 }
 //this function contains all the factory methods,or service call methods here.
 //web service call functions should be declared here with this.functionname(){} foramt.
-function factoryMethods(http){
-	this.functionName='hello this is a factory function';
+function factoryMethods(appService){
+	this.fetchSearch=function(serviceObj,callback){
+		appService.requestMaker(serviceObj,{
+			success:function(successData){
+				if(typeof callback.success=='function'){
+					 return callback.success(successData);
+				}
+			},
+			error:function (errorData) {
+				if(typeof callback.error=='function'){
+					return callback.error(errorData);
+				}
+			}
+		});
+	};
 }
-					
-},{"../../../../Development/Assets/Js/appConfig":1}]},{},[2,3,4,8,9,10,5,6,7,11,12,13,14,15,16]);
+
+},{"../../../../Development/Assets/Js/appConfig":1}]},{},[2,3,4,5,6,7,11,12,13,8,9,10,14,15,16]);
