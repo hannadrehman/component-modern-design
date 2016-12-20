@@ -335,6 +335,25 @@ function `+componentName+`Config(){
 //`+componentName+`Ctr.$inject=[];
 function `+componentName+`Ctr(){
 	console.log('`+componentName+` component is up and working');
+	var $this=this;
+	$this.$onInit=function(){
+		//component initialization
+		//declare all your scope variables here.
+
+	}
+	$this.$onChanges=function(changes){
+		//fired when using one way data binding '@' from parent component, and the value changes in parent.
+		//is fired first time also. 
+	}
+	$this.$postLink=function(){
+		//fired at the last. 
+		//is safe to do dom manuplation here. 
+		// inject $element to the controller to use it here.
+	}
+	$this.$onDestroy=function(){
+		//when scope is destroyed
+		//unbind all your event listeners here.
+	}
 }
  module.exports=`+componentName+`Ctr;`;
 					//injects  service with app module created into new component service created.
@@ -445,6 +464,25 @@ function factoryMethods(appService){
 //`+componentName+`Ctr.$inject=[];
 function `+componentName+`Ctr(){
 	console.log('`+componentName+` component is up and working');
+	var $this=this;
+	$this.$onInit=function(){
+		//component initialization
+		//declare all your scope variables here.
+
+	}
+	$this.$onChanges=function(changes){
+		//fired when using one way data binding '@' from parent component, and the value changes in parent.
+		//is fired first time also. 
+	}
+	$this.$postLink=function(){
+		//fired at the last. 
+		//is safe to do dom manuplation here. 
+		// inject $element to the controller to use it here.
+	}
+	$this.$onDestroy=function(){
+		//when scope is destroyed
+		//unbind all your event listeners here.
+	}
 }
  module.exports=`+componentName+`Ctr;`;
 

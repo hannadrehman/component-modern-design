@@ -1,3 +1,3 @@
-var app=angular.module('kmPortal',['templateCache','ui.router']);
+var app=angular.module('myApp',['templateCache','ui.router']);
 
 module.exports=app;
