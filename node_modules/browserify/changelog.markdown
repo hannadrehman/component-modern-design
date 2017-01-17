@@ -1,3 +1,20 @@
+# 13.3.0
+
+updates the version for the assert package
+
+https://github.com/substack/node-browserify/pull/1611
+
+# 13.2.0
+
+allow configuring transformKey from module-deps
+https://github.com/substack/node-browserify/pull/1670
+
+# 13.1.1
+
+boost performance by memoizing calls to path.relative()
+
+https://github.com/substack/node-browserify/pull/1544
+
 # 13.1.0
 
 exposes `opts.dedupe` and `--no-deupe` to optionally turn off deduping behavior:

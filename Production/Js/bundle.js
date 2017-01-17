@@ -70,11 +70,12 @@ function factoryMethods(http){
 						return callback.success(successData);
 						//returns the callback funtion from the service method
 					}
-				},function(errorData){
+				}).catch(function(errorData){
 					if(typeof callback.error=="function"){
 						return callback.error(errorData);
 					}
 				});
+				
 			} catch (e) {
 				return callback.error({status:404,statusText:e});
 
